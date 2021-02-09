@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=LinearPath
+comment1.params=
+comment1.target=LinearPath()
+comment2.params=time
+comment2.target=com.badlogic.gdx.math.Vector2\ evaluate(float)
+numComments=3
