@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=Function
+comment1.params=time
+comment1.target=com.badlogic.gdx.math.Vector2\ evaluate(float)
+comment2.params=time
+comment2.target=float\ getDirectionAngle(float)
+numComments=3
