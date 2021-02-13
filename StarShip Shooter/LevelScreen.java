@@ -69,8 +69,9 @@ public class LevelScreen extends BaseScreen
         if (enemyTimer > 2)
         {
             // spawn new enemy off-screen
-            new Enemy(4, mainStage);
-
+            double RAND=Math.random()*4 + 1;
+            // spawn new enemy off-screen
+            new Enemy((int)RAND, mainStage);
             // reset the timer
             enemyTimer = 0;
         }
