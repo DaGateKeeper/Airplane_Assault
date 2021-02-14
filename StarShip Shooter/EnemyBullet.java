@@ -7,7 +7,7 @@ public class EnemyBullet extends BaseActor
     {
         super(x,y,stage);
 
-        setAnimator( new Animator("assets/bullet-enemy.png") );
+        setAnimator( new Animator("assets/laser-red.png") );
         
         setPhysics( new Physics(0,450,0) );
         

@@ -12,6 +12,7 @@ public class LevelScreen extends BaseScreen
 
     public Player player;
     public float enemyTimer;
+    public int  enemyDestroyed;
 
     public void initialize()
     {
@@ -74,6 +75,28 @@ public class LevelScreen extends BaseScreen
             new Enemy((int)RAND, mainStage);
             // reset the timer
             enemyTimer = 0;
+        }
+        
+        for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
+        {
+            if (e.overlaps(player))
+            {
+                Explosion exp = new Explosion(0, 0, mainStage);
+                exp.centerAt(e);
+                e.remove();
+            }
+
+            for(BaseActor playerbullet: BaseActor.getList(mainStage,"PlayerBullet"))
+            {
+                if(playerbullet.overlaps(e))
+                {
+                    Explosion exp = new Explosion(0,0,mainStage);
+                    exp.centerAt(e);
+                    e.remove();
+                    enemyDestroyed++;
+
+                }
+            }
         }
     }
 }

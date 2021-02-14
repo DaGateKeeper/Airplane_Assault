@@ -7,7 +7,7 @@ public class PlayerBullet extends BaseActor
     {
         super(x,y,stage);
 
-        setAnimator( new Animator("assets/bullet-gold.png") );
+        setAnimator( new Animator("assets/laser-gold.png") );
         
         setPhysics( new Physics(0,450,0) );
         
