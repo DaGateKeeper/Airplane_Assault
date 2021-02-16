@@ -13,7 +13,9 @@ public class LevelScreen extends BaseScreen
     public Player player;
     public float enemyTimer;
     public int  enemyDestroyed;
-
+    
+    int score, upgradeNum;
+    Label LivesLabel, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
     public void initialize()
     {
         new Ocean(0,0, mainStage);
@@ -24,7 +26,29 @@ public class LevelScreen extends BaseScreen
         enemyTimer = 0;
 
         player = new Player(350, 100, mainStage);
-
+        score = 0; 
+        scoreLabel = new Label("Score: " + score, BaseGame.labelStyle);scoreLabel.setFontScale(0.5f);
+        playerLabel = new Label("Health", BaseGame.labelStyle);
+        //new Label("Health: " + player.health, BaseGame.labelStyle);       
+        playerLabel.setFontScale(0.5f);
+        upgradeLabel = new Label("Upgrades: " + upgradeNum, BaseGame.labelStyle);upgradeLabel.setFontScale(0.5f);
+        LivesLabel= new Label("Lives: ", BaseGame.labelStyle);LivesLabel.setFontScale(0.5f);
+        HIscoreLabel= new Label("Highscores ", BaseGame.labelStyle);HIscoreLabel.setFontScale(0.5f);
+        ShieldLabel= new Label("Shields Left ", BaseGame.labelStyle);ShieldLabel.setFontScale(0.5f);
+        
+        uiTable.add( playerLabel ).expandX().expandY().left().top().pad(20);
+        uiTable.add( ShieldLabel ).expandX().expandY().left().top().pad(20);
+        uiTable.add( HIscoreLabel  ).expandX().expandY().left().top().pad(20);
+        uiTable.add( scoreLabel  ).expandX().expandY().left().top().pad(20);
+        uiTable.row();
+        uiTable.add(upgradeLabel).expandX().left().top().pad(20);
+        uiTable.add();uiTable.add();
+        uiTable.add(LivesLabel).expandX().right().top().pad(20);
+        
+        //uiTable.debugCell();
+        uiTable.row();
+        uiTable.add();
+       
     }
 
     public void update(float deltaTime)
