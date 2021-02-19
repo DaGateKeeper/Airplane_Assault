@@ -14,7 +14,7 @@ public class Explosion extends BaseActor
         
         this.setPhysics( new Physics(0,1000,0) );
         this.physics.setSpeed(75);
-        this.physics.setMotionAngle(180);
+        this.physics.setMotionAngle(270);
     }
 
     public void act(float deltaTime)

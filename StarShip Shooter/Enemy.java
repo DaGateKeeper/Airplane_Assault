@@ -26,19 +26,24 @@ public class Enemy extends BaseActor
         if (preset == 1)
         {
             function = new LinearPath();
+            setAnimator( new Animator("assets/ships/Enemy1.png") );
         }
         else if (preset == 2)
         {
             function = new CircularPath();
+            setAnimator( new Animator("assets/ships/Enemy2.png") );
+            
         }
         else if (preset == 3)
         {
             function = new SinePath();
+            setAnimator( new Animator("assets/ships/Enemy3.png") );
         }
         else if (preset == 4)
         {
             time = -2;
             function = new HourglassPath();
+            setAnimator( new Animator("assets/ships/Enemy4.png") );
         }
     }
 

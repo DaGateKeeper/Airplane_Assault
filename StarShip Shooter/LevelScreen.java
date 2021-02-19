@@ -116,6 +116,7 @@ public class LevelScreen extends BaseScreen
                 {
                     Explosion exp = new Explosion(0,0,mainStage);
                     exp.centerAt(e);
+                    playerbullet.remove();
                     e.remove();
                     enemyDestroyed++;
 
