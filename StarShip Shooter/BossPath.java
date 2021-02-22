@@ -1,6 +1,6 @@
 import com.badlogic.gdx.math.Vector2;
 
-public class CircularPath extends Function
+public class BossPath extends Function
 {
     public Vector2 evaluate(float time)
     {
@@ -13,7 +13,7 @@ public class CircularPath extends Function
         else // circular motion
         {   
             x = (float)(300 * Math.cos(time) + 400);
-            y = (float)(300 * Math.sin(time) + 400);
+            y = (float)(Math.sin(time) + 400);
         }
         return new Vector2( x, y );
     }

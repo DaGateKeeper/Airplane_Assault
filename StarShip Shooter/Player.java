@@ -3,17 +3,16 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 public class Player extends BaseActor
 {
-
-    public Player(float x, float y, Stage stage)
+    private int index2_;
+    public Player(float x, float y, Stage stage,int INDEXed)
     {
         super(x,y,stage);
 
-        setAnimator( new Animator("assets/ships/player1.png") );
+        setAnimator( new Animator(Databases.getPlayerCopy(INDEXed).getfileName()) );
         setRotation( 90 );
         setBoundaryPolygon(8);
         
         setPhysics( new Physics(3000, 300, 3000) );
-        
     }
     
     public void act(float dt)
@@ -23,4 +22,5 @@ public class Player extends BaseActor
         boundToWorld(800,800);   
     }
 
+    
 }

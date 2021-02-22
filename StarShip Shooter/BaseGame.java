@@ -21,7 +21,7 @@ public abstract class BaseGame extends Game
     private static BaseGame game;
 
     public static LabelStyle labelStyle; // BitmapFont + Color
-    
+
     /**
      *  Called when game is initialized; stores global reference to game object.
      */
@@ -29,7 +29,7 @@ public abstract class BaseGame extends Game
     {        
         game = this;
     }
-    
+
     /**
      *  Called when game is initialized, 
      *  after Gdx.input and other objects have been initialized.
@@ -53,7 +53,7 @@ public abstract class BaseGame extends Game
         labelStyle = new LabelStyle();
         labelStyle.font = customFont;
     }
-    
+
     /**
      *  Used to switch screens while game is running.
      *  Method is static to simplify usage.
@@ -62,4 +62,5 @@ public abstract class BaseGame extends Game
     {
         game.setScreen(s);
     }
+
 }

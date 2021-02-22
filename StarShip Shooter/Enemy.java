@@ -45,21 +45,27 @@ public class Enemy extends BaseActor
             function = new HourglassPath();
             setAnimator( new Animator("assets/ships/Enemy4.png") );
         }
+        else if (preset == 5)
+        {
+            time = -2;
+            function = new BossPath();
+            setAnimator( new Animator("assets/ships/Boss.png") );
+        }
     }
 
     public void act(float dt)
     {
         super.act(dt);
-
+        final int BOSS=5;
         time += dt;
-
+        
         Vector2 position = function.evaluate(time);
         setPosition(position.x, position.y);
-
+        if (preset!=BOSS){
         // make enemy image face angle in direction of movement
         float movementAngle = function.getDirectionAngle(time);
         setRotation( movementAngle );
-
+    }
         BaseActor player = BaseActor.getList(getStage(), "Player").get(0); 
 
         shootTimer += dt;
@@ -85,7 +91,7 @@ public class Enemy extends BaseActor
 
             shootTimer = 0;
         }
-
+    }
     }
 
-}
+

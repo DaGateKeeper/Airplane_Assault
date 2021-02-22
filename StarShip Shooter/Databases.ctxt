@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.target=Databases
+comment1.params=
+comment1.target=Databases()
+comment1.text=\r\n\ Sole\ Private\ Constructor\:<br\ />\r\n\ Prevents\ the\ static\ class\ from\ being\ instantiated.\r\n
+comment2.params=index
+comment2.target=Players\ getPlayerCopy(int)
+comment2.text=\r\n\ Returns\ a\ copy\ of\ the\ Disease\ found\ at\ the\ specified\ index\ of\ the\ Database's\ disease\ array.\r\n\r\n\ @param\ index\ The\ index\ of\ the\ playerships.\r\n\ @return\ A\ copy\ of\ the\ ships\ found\ at\ the\ specified\ index.\r\n\ @throws\ IndexOutOfBoundsException\ Thrown\ if\ index\ is\ less\ than\ 0\ or\ greater\ than\ the\ length\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ of\ the\ ship\ array\ minus\ 1.\r\n
+comment3.params=name
+comment3.target=Players\ getPlayersCopy(java.lang.String)
+comment3.text=\r\n\ Returns\ a\ copy\ of\ the\ first\ Disease\ in\ the\ Database's\ disease\ array\ with\ the\ specified\ name.\r\n\r\n\ @param\ name\ The\ name\ of\ the\ Disease.\r\n\ @return\ A\ copy\ of\ the\ first\ Disease\ found\ with\ the\ specified\ name\ or\ null\ if\ none\ is\ found.\r\n
+comment4.params=
+comment4.target=int\ getPlayersLength()
+comment4.text=\r\n\ Returns\ the\ number\ of\ SHIPS\ objects\ stored\ in\ the\ Database.\r\n\r\n\ @return\ The\ number\ of\ SHIPS\ objects\ stored.\r\n
+comment5.params=index
+comment5.target=Bosses\ getPrecautionCopy(int)
+comment5.text=\r\n\ Returns\ a\ copy\ of\ the\ Precaution\ found\ at\ the\ specified\ index\ of\ the\ Database's\r\n\ precautionary\ measure\ array.\r\n\r\n\ @param\ index\ The\ index\ of\ the\ Precaution.\r\n\ @return\ A\ copy\ of\ the\ Precaution\ found\ at\ the\ specified\ index.\r\n\ @throws\ IndexOutOfBoundsException\ Thrown\ if\ index\ is\ less\ than\ 0\ or\ greater\ than\ the\ length\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ of\ the\ precautionary\ measure\ array\ minus\ 1.\r\n
+comment6.params=name
+comment6.target=Bosses\ getBossStatsCopy(java.lang.String)
+comment6.text=\r\n\ Returns\ a\ copy\ of\ the\ first\ Precaution\ in\ the\ Database's\ precautionary\ measures\ array\ with\r\n\ the\ specified\ name.\r\n\r\n\ @param\ name\ The\ name\ of\ the\ Precaution.\r\n\ @return\ A\ copy\ of\ the\ first\ Precaution\ found\ with\ the\ specified\ name\ or\ null\ if\ none\ is\r\n\ \ \ \ \ \ \ \ \ found.\r\n
+comment7.params=
+comment7.target=int\ getBossStatsLength()
+comment7.text=\r\n\ Returns\ the\ number\ of\ Precaution\ objects\ stored\ in\ the\ Database.\r\n\r\n\ @return\ The\ number\ of\ Precaution\ objects\ stored.\r\n
+numComments=8

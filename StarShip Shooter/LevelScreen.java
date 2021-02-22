@@ -20,21 +20,22 @@ public class LevelScreen extends BaseScreen
     {
         new Ocean(0,0, mainStage);
         new Ocean(0,800, mainStage);
-
+        //the below variable allows for manual changing of the ship it cooresponds to the index of the database or (fast, medium, slow)
+        int SELECTED = 2;
         new Island(mainStage);
 
+        
         enemyTimer = 0;
 
-        player = new Player(350, 100, mainStage);
+        player = new Player(350, 100, mainStage,SELECTED);
         score = 0; 
         scoreLabel = new Label("Score: " + score, BaseGame.labelStyle);scoreLabel.setFontScale(0.5f);
-        playerLabel = new Label("Health", BaseGame.labelStyle);
-        //new Label("Health: " + player.health, BaseGame.labelStyle);       
+        playerLabel = new Label("Health:"+Databases.getPlayerCopy(SELECTED).getHealth(), BaseGame.labelStyle);   
         playerLabel.setFontScale(0.5f);
         upgradeLabel = new Label("Upgrades: " + upgradeNum, BaseGame.labelStyle);upgradeLabel.setFontScale(0.5f);
         LivesLabel= new Label("Lives: ", BaseGame.labelStyle);LivesLabel.setFontScale(0.5f);
         HIscoreLabel= new Label("Highscores ", BaseGame.labelStyle);HIscoreLabel.setFontScale(0.5f);
-        ShieldLabel= new Label("Shields Left ", BaseGame.labelStyle);ShieldLabel.setFontScale(0.5f);
+        ShieldLabel= new Label("Shields:"+Databases.getPlayerCopy(SELECTED).getSheilds(), BaseGame.labelStyle);ShieldLabel.setFontScale(0.5f);
         
         uiTable.add( playerLabel ).expandX().expandY().left().top().pad(20);
         uiTable.add( ShieldLabel ).expandX().expandY().left().top().pad(20);
@@ -94,7 +95,8 @@ public class LevelScreen extends BaseScreen
         if (enemyTimer > 2)
         {
             // spawn new enemy off-screen
-            double RAND=Math.random()*4 + 1;
+            //double RAND=Math.random()*4 + 1;
+            double RAND=5;
             // spawn new enemy off-screen
             new Enemy((int)RAND, mainStage);
             // reset the timer
