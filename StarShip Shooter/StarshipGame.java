@@ -10,6 +10,9 @@ public class StarshipGame extends BaseGame
     public void create()
     {
         super.create();
-        this.setActiveScreen(new LevelScreen());
+        //this.setActiveScreen(new LevelScreen());
+        //this.setActiveScreen(new MenuScreen());
+        //this.setActiveScreen(new CreditsScreen());
+       //this.setActiveScreen(new HowToScreen());
     }
 }
