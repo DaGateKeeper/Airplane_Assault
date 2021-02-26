@@ -12,7 +12,7 @@ public class Player extends BaseActor
         setRotation( 90 );
         setBoundaryPolygon(8);
         
-        setPhysics( new Physics(3000, 250, 3000) );
+        setPhysics( new Physics(3000, Databases.getPlayerCopy(INDEXed).getSpeed(), 3000) );
     }
     
     public void act(float dt)
