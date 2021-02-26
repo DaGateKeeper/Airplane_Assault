@@ -13,7 +13,7 @@ public class LevelScreen extends BaseScreen
     public Player player;
     public float enemyTimer;
     public int  enemyDestroyed;
-    
+    int SELECTED;
     int score, upgradeNum;
     Label LivesLabel, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
     public void initialize()
@@ -21,7 +21,15 @@ public class LevelScreen extends BaseScreen
         new Ocean(0,0, mainStage);
         new Ocean(0,800, mainStage);
         //the below variable allows for manual changing of the ship it cooresponds to the index of the database or (fast, medium, slow)
-        int SELECTED = 2;
+        if (Gdx.input.isKeyJustPressed(Keys.S)){
+            SELECTED =0;
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.D)){
+            SELECTED =2;
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.A)){
+            SELECTED =1;
+        }
         new Island(mainStage);
 
         

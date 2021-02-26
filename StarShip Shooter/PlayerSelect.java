@@ -48,26 +48,18 @@ public class PlayerSelect extends BaseScreen
         //uiTable.add(credits);
 
     }
-// this code under here is supposed to take the key and depending on what they choose it will go to the next screen with that ship as the main one.
+    // this code under here is supposed to take the key and depending on what they choose 
+    //it will go to the next screen with that ship as the main one.
     public void update(float deltaTime)
     {
-        int selected=0;
-        
         if (Gdx.input.isKeyJustPressed(Keys.S)){
-            selected =0;
-
-            //BaseGame.setActiveScreen( new LevelScreen() );      
-            System.out.println(selected);
+            BaseGame.setActiveScreen( new LevelScreen() );      
         }
         if (Gdx.input.isKeyJustPressed(Keys.D)){
-            selected =2;
-            //BaseGame.setActiveScreen( new LevelScreen() );  
-            System.out.println(selected);
+            BaseGame.setActiveScreen( new LevelScreen() );  
         }
         if (Gdx.input.isKeyJustPressed(Keys.A)){
-            selected =1;
             BaseGame.setActiveScreen( new LevelScreen() );  
         }
     } 
-    
 }
