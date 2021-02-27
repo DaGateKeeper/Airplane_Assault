@@ -9,7 +9,7 @@ import com.badlogic.gdx.audio.Music;
 
 public class LevelScreen extends BaseScreen
 {
-
+    public float shootTimer;
     public Player player;
     public float enemyTimer;
     public int  enemyDestroyed;
@@ -32,7 +32,7 @@ public class LevelScreen extends BaseScreen
         }
         new Island(mainStage);
 
-        
+        shootTimer = 1;
         enemyTimer = 0;
 
         player = new Player(350, 100, mainStage,SELECTED);
@@ -44,7 +44,7 @@ public class LevelScreen extends BaseScreen
         LivesLabel= new Label("Lives: ", BaseGame.labelStyle);LivesLabel.setFontScale(0.5f);
         HIscoreLabel= new Label("Highscores ", BaseGame.labelStyle);HIscoreLabel.setFontScale(0.5f);
         ShieldLabel= new Label("Shields:"+Databases.getPlayerCopy(SELECTED).getSheilds(), BaseGame.labelStyle);ShieldLabel.setFontScale(0.5f);
-        
+
         uiTable.add( playerLabel ).expandX().expandY().left().top().pad(20);
         uiTable.add( ShieldLabel ).expandX().expandY().left().top().pad(20);
         uiTable.add( HIscoreLabel  ).expandX().expandY().left().top().pad(20);
@@ -53,16 +53,16 @@ public class LevelScreen extends BaseScreen
         uiTable.add(upgradeLabel).expandX().left().top().pad(20);
         uiTable.add();uiTable.add();
         uiTable.add(LivesLabel).expandX().right().top().pad(20);
-        
+
         //uiTable.debugCell();
         uiTable.row();
         uiTable.add();
-       
+
     }
 
     public void update(float deltaTime)
     {
-        // user input
+        shootTimer +=deltaTime;
         if (Gdx.input.isKeyPressed(Keys.LEFT))
             player.physics.accelerateAtAngle(180);
         if (Gdx.input.isKeyPressed(Keys.RIGHT))
@@ -72,10 +72,11 @@ public class LevelScreen extends BaseScreen
         if (Gdx.input.isKeyPressed(Keys.DOWN))
             player.physics.accelerateAtAngle(270);
 
-        if (Gdx.input.isKeyJustPressed(Keys.SPACE))
+        if (Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1)
         {
             PlayerBullet pb = new PlayerBullet(0,0, mainStage);
             pb.centerAt(player);
+            shootTimer=0;
         }
 
         int islandCount = BaseActor.getList(mainStage, "Island").size();
@@ -110,7 +111,7 @@ public class LevelScreen extends BaseScreen
             // reset the timer
             enemyTimer = 0;
         }
-        
+
         for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
         {
             if (e.overlaps(player))
