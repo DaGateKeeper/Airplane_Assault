@@ -20,7 +20,7 @@ public class Physics
          velocity = new Vector2();
          acceleration = new Vector2();
          
-         maximumSpeed = 1500;
+         maximumSpeed = 500;
          accelerationValue = 800;
          decelerationValue = 800;
     }
