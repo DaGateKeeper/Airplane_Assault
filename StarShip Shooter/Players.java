@@ -21,7 +21,7 @@ public class Players
     private double health_;
     
     /** The maximum Sheilds the player posses. */
-    private double sheilds_;
+    private int sheilds_;
     
     /** How fast the player can move. */
     private double speed_;
@@ -66,7 +66,7 @@ public class Players
      * @param RateofFire how fast it shoots
      * @param PlayerDamage how much damage each shot does
      */
-    public Players(String fileName, double health,double sheilds, double speed,float rateofFire,int PlayerDamage)
+    public Players(String fileName, double health,int sheilds, double speed,float rateofFire,int PlayerDamage)
     {
         fileName_= fileName;
         health_= health;
@@ -99,12 +99,12 @@ public class Players
         this.health_ = health;
     }
         
-    public double getSheilds()
+    public int getSheilds()
     {
         return sheilds_;
     }
     
-    public void setSheilds(double sheilds)
+    public void setSheilds(int sheilds)
     {
         this.sheilds_ = sheilds;
     }

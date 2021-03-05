@@ -6,14 +6,14 @@ public final class Databases
     
     /** Contains all BOSS preset information. */
     private static final Bosses[] BOSSSTATS_;
-    
+
     //----- CONSTRUCTORS -----
     // Initializes static fields.
     static
     {
         PLAYERSHIPS_ = new Players[]
        {
-            // Initialize all Disease presets here.
+            // Initialize all player presets here.
           new Players("assets/ships/player1.png", 200, 200, 550, 20, 100),
           new Players("assets/ships/player2.png", 150, 150, 300, 30, 200),
           new Players("assets/ships/player3.png", 300, 230, 150, 10, 50),  
@@ -22,8 +22,8 @@ public final class Databases
         BOSSSTATS_ = new Bosses[]
         {
             // Initialize all precautionary measure presets here.
-           new Bosses(),
-           new Bosses()
+           new Bosses("assets/ships/Boss.png", 1000, 10),
+           new Bosses("assets/ships/Boss.png", 1000, 10)
         };
     }
     

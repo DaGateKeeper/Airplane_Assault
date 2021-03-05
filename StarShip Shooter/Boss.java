@@ -2,7 +2,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.math.Vector2;
 
-public class Enemy extends BaseActor
+public class Boss extends BaseActor
 {
     public int preset;
     public float time;
@@ -12,54 +12,39 @@ public class Enemy extends BaseActor
 
     public float shootTimer;
 
-    public Enemy(int p, Stage stage)
+    public Boss(int p, Stage stage)
     {
         super(1000,1000, stage);
 
         preset = p;
 
-        setAnimator( new Animator("assets/ships/enemy1.png") );
+        setAnimator( new Animator("assets/ships/Boss.png") );
         setSize(80,80);
         time = 0;
         shootTimer = 0;
 
+        
         if (preset == 1)
         {
-            function = new LinearPath();
-            setAnimator( new Animator("assets/ships/Enemy1.png") );
-        }
-        else if (preset == 2)
-        {
-            function = new CircularPath();
-            setAnimator( new Animator("assets/ships/Enemy2.png") );
-
-        }
-        else if (preset == 3)
-        {
-            function = new SinePath();
-            setAnimator( new Animator("assets/ships/Enemy3.png") );
-        }
-        else if (preset == 4)
-        {
             time = -2;
-            function = new HourglassPath();
-            setAnimator( new Animator("assets/ships/Enemy4.png") );
+            function = new BossPath();
+            setAnimator( new Animator("assets/ships/Boss.png") );
         }
     }
 
     public void act(float dt)
     {
         super.act(dt);
-
+        
         time += dt;
 
         Vector2 position = function.evaluate(time);
         setPosition(position.x, position.y);
-
-        // make enemy image face angle in direction of movement
-        float movementAngle = function.getDirectionAngle(time);
-        setRotation( movementAngle );
-
+        if (preset!=1){
+            // make enemy image face angle in direction of movement
+            float movementAngle = function.getDirectionAngle(time);
+            setRotation( movementAngle );
+        }
         BaseActor player = BaseActor.getList(getStage(), "Player").get(0); 
 
         shootTimer += dt;
