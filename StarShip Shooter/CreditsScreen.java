@@ -46,8 +46,8 @@ public class CreditsScreen extends BaseScreen
         if (Gdx.input.isKeyJustPressed(Keys.S)){
             BaseGame.setActiveScreen( new  PlayerSelect() );        
         }
-        if (Gdx.input.isKeyJustPressed(Keys.W)){
-            BaseGame.setActiveScreen( new CreditsScreen() );        
+        if (Gdx.input.isKeyJustPressed(Keys.H)){
+            BaseGame.setActiveScreen( new HowToScreen() );        
         }
     } 
 }

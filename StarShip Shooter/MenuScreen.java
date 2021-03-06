@@ -22,7 +22,7 @@ public class MenuScreen extends BaseScreen
         Label instructions = new Label("Press 'S' to Start", BaseGame.labelStyle);
         instructions.setColor( Color.CYAN );
 
-        Label goal2 = new Label("Press 'A' for Instructions", BaseGame.labelStyle);
+        Label goal2 = new Label("Press 'H' for Instructions", BaseGame.labelStyle);
         goal2.setColor( Color.CYAN );
 
         Label credits = new Label("Press 'W' for Credits", BaseGame.labelStyle);
@@ -56,5 +56,8 @@ public class MenuScreen extends BaseScreen
         if (Gdx.input.isKeyJustPressed(Keys.W)){
             BaseGame.setActiveScreen( new CreditsScreen() );        
         }
-    } 
+        if(Gdx.input.isKeyJustPressed(Keys.H)){
+            BaseGame.setActiveScreen( new HowToScreen() );
+        }
+    }
 }
