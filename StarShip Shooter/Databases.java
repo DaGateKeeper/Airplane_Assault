@@ -14,7 +14,7 @@ public final class Databases
         PLAYERSHIPS_ = new Players[]
        {
             // Initialize all player presets here.
-          new Players("assets/ships/player1.png", 200, 200, 550, 20, 100),
+          new Players("assets/ships/player1a.png", 200, 200, 550, 20, 100),
           new Players("assets/ships/player2.png", 150, 150, 300, 30, 200),
           new Players("assets/ships/player3.png", 300, 230, 150, 10, 50),  
        };
