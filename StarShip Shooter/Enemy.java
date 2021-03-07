@@ -74,14 +74,14 @@ public class Enemy extends BaseActor
 
         if ( shootTimer > 1 )
         {
-            EnemyBullet eb = new EnemyBullet(0,0, getStage());
-            eb.centerAt(this);
+            //EnemyBullet eb = new EnemyBullet(0,0, getStage());
+           // eb.centerAt(this);
 
             Vector2 displacement = player.getPosition().sub( this.getPosition() );
             float angle = displacement.angle(); 
 
-            eb.setRotation(angle + 90);
-            eb.physics.setMotionAngle(angle);
+            //eb.setRotation(angle + 90);
+            //eb.physics.setMotionAngle(angle);
 
             shootTimer = 0;
         }

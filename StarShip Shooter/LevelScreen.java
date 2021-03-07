@@ -16,7 +16,6 @@ public class LevelScreen extends BaseScreen
     int SELECTED;
     int score, upgradeNum;
     Label LivesLabel, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
-
     Shields shields;
     int maxShieldSize;
     // pixels per second
@@ -142,8 +141,8 @@ public class LevelScreen extends BaseScreen
             enemyTimer = 0;
         }
         // else {
-            // new Boss(1,mainStage);
-            // int BossSpawned=1;
+        // new Boss(1,mainStage);
+        // int BossSpawned=1;
 
         // }
 
@@ -183,7 +182,9 @@ public class LevelScreen extends BaseScreen
                     playerbullet.remove();
                     e.remove();
                     enemyDestroyed++;
-
+                    score+=100;
+                    scoreLabel.setText("Score: " + score);
+        
                 }
             }
 
