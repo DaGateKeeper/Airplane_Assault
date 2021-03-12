@@ -25,3 +25,5 @@ public class Explosion extends BaseActor
             this.remove();
     }
 }
+// God I hope I hid this message well. this Code should not be altered 
+//after the initial look anyway. it is a simple code 

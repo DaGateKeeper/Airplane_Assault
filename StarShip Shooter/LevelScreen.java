@@ -22,7 +22,8 @@ public class LevelScreen extends BaseScreen
     int shieldRegenerationRate;
     static double PlayerHealth;
     public double PlayerShields;
-
+// some of the above was changed to static so that other classes can see the variables. perhaps that is how we can get around a few of the issues.
+// can't say. only time will tell. Hopefully I will be able to remedy some of the issues that are inherently bad. 
     public void initialize()
     {
         new Ocean(0,0, mainStage);

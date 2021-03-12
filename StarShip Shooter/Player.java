@@ -4,10 +4,10 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 public class Player extends BaseActor
 {
     private int index2_;
-    // Tracks how long the Koala has been invincible for after taking damage.
+    // Tracks how long the ship has been invincible for after taking damage. Code was scrapped from an old game. possibly some inconsistancies
     public float invTimer;
 
-    // How long the Koala can stay invincible.
+    // How long the ship can stay invincible.might be able to be reworked as a sheild recharger? I cant say. 
     public float maxInvTime;
     public Player(float x, float y, Stage stage,int INDEXed)
     {
