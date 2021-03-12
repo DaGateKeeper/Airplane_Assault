@@ -15,12 +15,12 @@ public class LevelScreen extends BaseScreen
     public int  enemyDestroyed;
     int SELECTED;
     int score, upgradeNum;
-    Label LivesLabel, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
+    static Label LivesLabel, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
     Shields shields;
     int maxShieldSize;
     // pixels per second
     int shieldRegenerationRate;
-    public double PlayerHealth;
+    static double PlayerHealth;
     public double PlayerShields;
 
     public void initialize()
@@ -164,14 +164,15 @@ public class LevelScreen extends BaseScreen
                 shields.setBoundaryPolygon(8);
                 ShieldLabel.setText("Shields:"+sizeVAR);
 
-            }else if (e.overlaps(player))
-            {
-                Explosion exp = new Explosion(0, 0, mainStage);
-                exp.centerAt(e);
-                e.remove();
-                PlayerHealth-=10;
-                playerLabel.setText("Health:"+PlayerHealth);
             }
+            // else if (e.overlaps(player))
+            // {
+                // Explosion exp = new Explosion(0, 0, mainStage);
+                // exp.centerAt(e);
+                // e.remove();
+                // PlayerHealth-=10;
+                // playerLabel.setText("Health:"+PlayerHealth);
+            ///}
 
             for(BaseActor playerbullet: BaseActor.getList(mainStage,"PlayerBullet"))
             {
