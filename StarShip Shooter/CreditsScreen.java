@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.audio.Sound;
 public class CreditsScreen extends BaseScreen
 {
-
+    
     public void initialize()
     {
         BaseActor background = new BaseActor(0,0, mainStage);
@@ -23,7 +23,16 @@ public class CreditsScreen extends BaseScreen
 
         Label CredName2 = new Label("James Meurer", BaseGame.labelStyle);
         CredName2.setColor( Color.CYAN );
-
+        
+        Label HowToScreen = new Label("Press H for the How to Screen", BaseGame.labelStyle);
+        HowToScreen.setFontScaleX(0.5f);
+        HowToScreen.setColor(Color.CYAN);
+        //yes i know this is sloppy...this will be fixed later
+        
+        Label MenuScreen = new Label("Press M for the Main Menu",BaseGame.labelStyle);
+        MenuScreen.setFontScaleX(0.5f);
+        MenuScreen.setColor(Color.CYAN);
+        
 
         uiTable.add(intro);
         uiTable.row();
@@ -37,6 +46,13 @@ public class CreditsScreen extends BaseScreen
         uiTable.row();
         uiTable.add(CredName2);
         uiTable.row();
+        uiTable.add().pad(10);
+        uiTable.add().row();
+        uiTable.add(HowToScreen);
+        uiTable.row();
+        uiTable.add().pad(10);
+        uiTable.row();
+        uiTable.add(MenuScreen);
         //uiTable.add(credits);
 
     }
@@ -48,6 +64,9 @@ public class CreditsScreen extends BaseScreen
         }
         if (Gdx.input.isKeyJustPressed(Keys.H)){
             BaseGame.setActiveScreen( new HowToScreen() );        
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.M)){
+            BaseGame.setActiveScreen( new MenuScreen() );        
         }
     } 
 }

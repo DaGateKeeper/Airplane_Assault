@@ -51,7 +51,7 @@ public class MenuScreen extends BaseScreen
     public void update(float deltaTime)
     {
         if (Gdx.input.isKeyJustPressed(Keys.S)){
-            BaseGame.setActiveScreen( new  PlayerSelect() );        
+            BaseGame.setActiveScreen( new PlayerSelect() );        
         }
         if (Gdx.input.isKeyJustPressed(Keys.W)){
             BaseGame.setActiveScreen( new CreditsScreen() );        
@@ -59,5 +59,8 @@ public class MenuScreen extends BaseScreen
         if(Gdx.input.isKeyJustPressed(Keys.H)){
             BaseGame.setActiveScreen( new HowToScreen() );
         }
+        //if(Gdx.input.isKeyJustPressed(Keys.F)){
+        //BaseGame.setActiveScreen(new HighScoreScreen() );
+        //adding this in for later.. we will be needing this for people to see the high scores
     }
 }

@@ -28,10 +28,10 @@ public class HowToScreen extends BaseScreen
 
         Label instruct2 = new Label("use space to fire", BaseGame.labelStyle);
         instruct2.setColor( Color.CYAN );
-        
+
         Label instruct3 = new Label ("Collect upgrade parts!", BaseGame.labelStyle);
         instruct2.setColor( Color.CYAN );
-        
+
         Label instruct4 = new Label("Have fun!",BaseGame.labelStyle);
         instruct2.setColor( Color.CYAN );
 
@@ -55,10 +55,14 @@ public class HowToScreen extends BaseScreen
     public void update(float deltaTime)
     {
         if (Gdx.input.isKeyJustPressed(Keys.S)){
-            BaseGame.setActiveScreen( new  PlayerSelect() );        
+            BaseGame.setActiveScreen( new PlayerSelect() );        
         }
         if (Gdx.input.isKeyJustPressed(Keys.W)){
             BaseGame.setActiveScreen( new CreditsScreen() );        
         }
+        //if(Gdx.input.isKeyJustPressed(Keys.N))
+        //{
+        //    BaseGame.setActiveScreen(new PowerUpScreen());
+        //}
     } 
 }
