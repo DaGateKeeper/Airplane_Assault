@@ -1,33 +1,57 @@
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 
-/**
- * Write a description of class ShipInfoScreen here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
-public class ShipInfoScreen
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.audio.Sound;
+public class ShipInfoScreen extends BaseScreen
 {
-    // instance variables - replace the example below with your own
-    private int x;
 
-    /**
-     * Constructor for objects of class ShipInfoScreen
-     */
-    public ShipInfoScreen()
+    public void initialize()
     {
-        // initialise instance variables
-        x = 0;
+        BaseActor background = new BaseActor(0,0, mainStage);
+        background.setAnimator( new Animator("assets/water.jpg") );
+        background.setSize(800,640);
+
+        Label title = new Label("Ship Info", BaseGame.labelStyle);
+        title.setFontScale(1.5f);
+        title.setColor(Color.CYAN);
+
+        Label SpeedyInfo = new Label("The fastest ship in the game/n but has the lowest health./n can only fire one shot at a time",BaseGame.labelStyle);
+        SpeedyInfo.setFontScale(0.5f);
+        SpeedyInfo.setColor(Color.CYAN);
+
+        Label AverageInfo = new Label("The Average ship no Strength's no weaknesses /n fires two shots at a time but has no middle shot", BaseGame.labelStyle);
+        AverageInfo.setFontScale(0.5f);
+        AverageInfo.setColor(Color.CYAN);
+
+        Label DefenseInfo = new Label("The Defensive ship the highest health but the lowest speed /n fires three shots but the shot is spread.",BaseGame.labelStyle);
+        DefenseInfo.setFontScale(0.5f);
+        DefenseInfo.setColor(Color.CYAN);
+
+        uiTable.add(title).colspan(2);
+        uiTable.row();
+        uiTable.add(SpeedyInfo);
+        uiTable.row();
+        uiTable.add(AverageInfo);
+        uiTable.row();
+        uiTable.add(DefenseInfo);
+
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
+    public void update(float deltaTime)
     {
-        // put your code here
-        return x + y;
+        if (Gdx.input.isKeyJustPressed(Keys.S)){
+            BaseGame.setActiveScreen( new PlayerSelect() );        
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.W)){
+            BaseGame.setActiveScreen( new CreditsScreen() );        
+        }
+        if(Gdx.input.isKeyJustPressed(Keys.H)){
+            BaseGame.setActiveScreen( new HowToScreen() );
+        }
+        //if(Gdx.input.isKeyJustPressed(Keys.F)){
+        //BaseGame.setActiveScreen(new HighScoreScreen() );
+        //adding this in for later.. we will be needing this for people to see the high scores
     }
 }

@@ -96,9 +96,9 @@ public class HowToScreen extends BaseScreen
         {
             BaseGame.setActiveScreen(new MenuScreen() );
         }
-        //if(Gdx.input.isKeyJustPressed(Keys.N))
-        //{
-        //    BaseGame.setActiveScreen(new ShipInfoScreen());
-        //}
+        if(Gdx.input.isKeyJustPressed(Keys.N))
+        {
+            BaseGame.setActiveScreen(new ShipInfoScreen());
+        }
     } 
 }

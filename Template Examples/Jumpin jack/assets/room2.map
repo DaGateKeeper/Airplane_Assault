@@ -1,0 +1,60 @@
+# this is a comment!
+# first character of each line
+#  indicates type of data that line represents.
+#  I = tileset image file name
+#  R = number of rows in tileset image
+#  C = number of columns in tileset image
+#  T = table data (String -> Integer conversion)
+#  L = level map data
+#  N = room number (used to switch between maps)
+
+# image data
+I assets/platform-tiles.png
+R 4
+C 4
+
+# table data for the tiles
+T B,6
+T G,7
+T L,0
+T C,1
+T R,2
+T l,4
+T r,5
+
+# symbols that represent objects (not tiles)
+# c = Coin
+# h = Heart
+# p = Platform
+# 0 = door to room 0
+# 1 = door to room 1
+# 2 = door to room 2
+
+# this room number
+N 2
+
+# level data
+L G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G
+L G, , , , , , , , , , , , , ,G, , , , ,G,G,G,G,G,G
+L G, , , , , , , , , , , , , , , , , , ,G,G,G,G,G,G
+L G, , , , , , , , , , , ,0, ,Lb, ,c,c,c,c, , , , ,G
+L G, , , , , , , , , , , ,p,p,G,G,c,c,c,c,Lr, ,3, ,G
+L G, , , ,c, , , , , , , , , ,G,G,p,p,p,p,p,G,G,G,G
+L G, , ,p,p,p, , , ,c, , , ,c,G, , , , , , , ,c, ,G
+L G,c, , , , , , ,p,p, , ,p,p,G, , , , , , , ,p, ,G
+L G,p,p, , , , , , , , , , , ,G,G,G,c,c,c, , , ,c,G
+L G,c, , , ,s,s,s,s,s,s,s, , ,G, , ,p,p,p, , , ,p,G
+L G,p,p, , ,G,G,G,G,G,G,G, , ,G, , , , , , ,c, , ,G
+L G, , , , , , , , , , , , , ,G,c, , , , , ,p, , ,G
+L G,c, , , , , ,c,c,c, , , , ,G,p, ,c,c, ,c, , , ,G
+L G,p,p,p, ,p,p,p,p,p,p,p, , ,G, , ,p,p, ,p, ,c, ,G
+L G, , , , , , , , , , , , , ,G, , , , ,c, , ,p, ,G
+L G, , , ,c,c, , , , , ,c,c, ,G, , , , ,p, , , ,c,G
+L G, , ,p,p,p,p, ,G, ,p,p,p,p,G,c,c, ,c, , ,c, ,p,G
+L G, , , , , , , ,G, , , , , ,G,p,p, ,p, , ,p, , ,G
+L G,1, , , , , , ,G,s,s,s,s,s,G,s,s,s,s,s,s,s,s,s,G
+L C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C
+
+
+
+
