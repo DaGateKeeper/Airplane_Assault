@@ -48,24 +48,6 @@ public final class Databases
         return new Players(PLAYERSHIPS_[index]);
     }
     
-    /**
-     * Returns a copy of the first Disease in the Database's disease array with the specified name.
-     *
-     * @param name The name of the Disease.
-     * @return A copy of the first Disease found with the specified name or null if none is found.
-     */
-    public static Players getPlayersCopy(String name)
-    {
-        //for (Disease disease : DISEASES_)
-        //{
-         //   if (disease.getName() == name)
-         //   {
-           //     return new Disease(disease);
-          //  }
-        //}
-        
-        return null;
-    }
     
     /**
      * Returns the number of SHIPS objects stored in the Database.
@@ -86,30 +68,9 @@ public final class Databases
      * @throws IndexOutOfBoundsException Thrown if index is less than 0 or greater than the length
      *                                   of the precautionary measure array minus 1.
      */
-    public static Bosses getPrecautionCopy(int index) throws IndexOutOfBoundsException
+    public static Bosses getBossStats(int index) throws IndexOutOfBoundsException
     {
-        return null; //new Precaution(PRECAUTIONS_[index]);
-    }
-    
-    /**
-     * Returns a copy of the first Precaution in the Database's precautionary measures array with
-     * the specified name.
-     *
-     * @param name The name of the Precaution.
-     * @return A copy of the first Precaution found with the specified name or null if none is
-     *         found.
-     */
-    public static Bosses getBossStatsCopy(String name)
-    {
-        //for (Bosses precaution : PRECAUTIONS_)
-        //{//
-          //  if (precaution.getName() == name)
-          //  {
-           //     return new Precaution(precaution);
-          //  }
-      //  }
-    
-        return null;
+        return new Bosses(BOSSSTATS_[index]);
     }
     
     /**

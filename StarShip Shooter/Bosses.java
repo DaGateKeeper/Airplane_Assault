@@ -13,15 +13,15 @@ public class Bosses{
 
     /** The name of the Bosses ship. */
     private String fileName_;
-    
+
     /** The maximum health the Bosses posses. */
     private double health_;
 
     /** the Amount of damage the boss does per hit(if fires more than one bullet fraction it between the two. */
     private int BossesDamage_;
-    
+
     //----- CONSTRUCTORS -----
-    
+
     /**
      * Default Constructor:<br />
      * Creates a new Bosses with default values (0) and the name "assets/ships/Bosses1.png"".
@@ -30,7 +30,7 @@ public class Bosses{
     {
         this("assets/ships/Bosses1.png",1000, 10);
     }
-    
+
     /**
      * Copy Constructor: <br />
      * Creates a deep copy of the specified Bosses object.
@@ -41,7 +41,7 @@ public class Bosses{
     {
         this(Bosses.fileName_, Bosses.health_,Bosses.BossesDamage_);
     }
-    
+
     /**
      * Parameterized Constructor:<br />
      * Creates a new Bosses with the specified parameters.
@@ -55,40 +55,39 @@ public class Bosses{
         fileName_= fileName;
         health_= health;
         BossesDamage_= BossesDamage;
-            
+
     }
-    
+
     //----- METHODS -----
     // Get & Set
     public String getfileName()
     {
         return fileName_;
     }
-    
+
     public void setfileName(String fileName)
     {
         this.fileName_ = fileName;
     }
-    
+
     public double getHealth()
     {
         return health_;
     }
-    
+
     public void setHealth(double health)
     {
         this.health_ = health;
     }
-    
+
     public float getBossesDamage()
     {
         return BossesDamage_;
     }
-    
+
     public void setBossesDamage(int BossesDamage)
     {
         this.BossesDamage_ = BossesDamage;
     }
-
 
 }

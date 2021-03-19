@@ -11,16 +11,17 @@ public class LevelScreen extends BaseScreen
 {
     public float shootTimer;
     public Player player;
-    public float enemyTimer;
+    public float enemyTimer, BossT;
     public int  enemyDestroyed;
     int SELECTED;
     int score, upgradeNum;
-    static Label LivesLabel, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
+    static Label LivesLabel, Debug, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
+    
     Shields shields;
     int maxShieldSize;
     // pixels per second
     int shieldRegenerationRate;
-    static double PlayerHealth;
+    static double PlayerHealth, debugh;
     public double PlayerShields;
 // some of the above was changed to static so that other classes can see the variables. perhaps that is how we can get around a few of the issues.
 // can't say. only time will tell. Hopefully I will be able to remedy some of the issues that are inherently bad. 
@@ -42,9 +43,12 @@ public class LevelScreen extends BaseScreen
 
         shootTimer = 1;
         enemyTimer = 0;
-
+        BossT=10000;
         player = new Player(350, 100, mainStage,SELECTED);
-
+        
+        debugh=Databases.getBossStats(0).getHealth();
+        Debug= new Label("Health:"+debugh, BaseGame.labelStyle);   
+        Debug.setFontScale(0.5f);
         maxShieldSize = Databases.getPlayerCopy(SELECTED).getSheilds();  
 
         shields = new Shields(0,0, mainStage);
@@ -78,7 +82,7 @@ public class LevelScreen extends BaseScreen
         //uiTable.debugCell();
         uiTable.row();
         uiTable.add();
-
+uiTable.add(Debug).expandX().right().top().pad(20);
     }
 
     public void update(float deltaTime)
@@ -130,8 +134,10 @@ public class LevelScreen extends BaseScreen
             ocean.toBack();
 
         enemyTimer += deltaTime;
-
-        if (enemyTimer> 1)
+        
+        BossT+= deltaTime;
+        
+        if (enemyTimer> 2)
         {
             // spawn new enemy off-screen
             double RAND=Math.random()*4 + 1;
@@ -142,10 +148,11 @@ public class LevelScreen extends BaseScreen
             enemyTimer = 0;
         }
         // else {
-        // new Boss(1,mainStage);
+            if(BossT>100)
+        {new Boss(1,mainStage);
         // int BossSpawned=1;
-
-        // }
+        BossT=0;
+        }
 
         for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
         {
@@ -208,15 +215,38 @@ public class LevelScreen extends BaseScreen
                 shields.setBoundaryPolygon(8);
                 ShieldLabel.setText("Shields:"+sizeVAR);
 
-            }else if (eb.overlaps(player))
-            {
-                Explosion exp = new Explosion(0, 0, mainStage);
-                exp.centerAt(eb);
-                eb.remove();
-                PlayerHealth-=10;
-                playerLabel.setText("Health:"+PlayerHealth);
             }
         }
+        for(BaseActor BossD :BaseActor.getList(mainStage, "Boss"))   
+        {
+            if ( BossD.overlaps(shields) && shields.getWidth()>0)
+            {
+               
+                Explosion explosion = new Explosion(0,0, mainStage);
+                explosion.centerAt(player);
+
+                float size = shields.getWidth();
+                size -= 50;
+                double sizeVAR= size;
+                // shields.setSize( size, size );
+                // gradually shrink size with an action
+                shields.addAction( Actions.sizeTo(size, size, 0.25f) );
+                shields.setBoundaryPolygon(8);
+                ShieldLabel.setText("Shields:"+sizeVAR);
+
+            }            
+            for(BaseActor playerbullet: BaseActor.getList(mainStage,"PlayerBullet"))
+            {
+                if(playerbullet.overlaps(BossD))
+                {
+                    Explosion exp = new Explosion(0,0,mainStage);
+                    exp.centerAt(playerbullet);
+                    
+        
+                }
+            }
+        }
+        
         if(PlayerHealth==0){
             //System.exit(0);
 

@@ -22,7 +22,7 @@ public class Player extends BaseActor
         invTimer = maxInvTime;
     }
 
-    public void takeDamage()
+    public void takeDamageP()
     {
         if (invTimer >= maxInvTime)
         {
@@ -58,15 +58,29 @@ public class Player extends BaseActor
         for (BaseActor enemy : BaseActor.getList(getStage(), "Enemy"))
         {
             if (overlaps(enemy)){
-                takeDamage();
+                takeDamageP();
+
+                //Explosion exp = new Explosion(0, 0, mainStage);
+                //exp.centerAt(enemy);
+
+            }
+        }for (BaseActor enemyb : BaseActor.getList(getStage(), "EnemyBullet"))
+        {
+            if (overlaps(enemyb)){
+                takeDamageP();
 
                 //Explosion exp = new Explosion(0, 0, mainStage);
                 //exp.centerAt(enemy);
 
             }
         }
+        for (BaseActor boss : BaseActor.getList(getStage(), "Boss"))
+        {
+            if (overlaps(boss)){
+                takeDamageP();
+            }
+        }
 
-            
         boundToWorld(800,800);   
     }
 

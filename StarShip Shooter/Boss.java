@@ -11,7 +11,7 @@ public class Boss extends BaseActor
     public Function function;
 
     public float shootTimer;
-
+    static double Health;// a variable to track the health
     public Boss(int p, Stage stage)
     {
         super(1000,1000, stage);
@@ -23,19 +23,28 @@ public class Boss extends BaseActor
         time = 0;
         shootTimer = 0;
 
-        
         if (preset == 1)
         {
             time = -2;
             function = new BossPath();
             setAnimator( new Animator("assets/ships/Boss.png") );
+            Health=Databases.getBossStats(preset).getHealth();
         }
+    }
+
+    public void takeDamage()
+    {
+
+        //dex will be the spot in the index the ship is in
+
+        Health-=10;
+        LevelScreen.Debug.setText("Health:"+ Health);
     }
 
     public void act(float dt)
     {
         super.act(dt);
-        
+
         time += dt;
 
         Vector2 position = function.evaluate(time);
@@ -69,6 +78,15 @@ public class Boss extends BaseActor
             eb.physics.setMotionAngle(angle);
 
             shootTimer = 0;
+        }
+
+        for (BaseActor pb : BaseActor.getList(getStage(), "PlayerBullet"))
+        {// checks for collisions and if ih detects it executes taking damage
+            if (overlaps(pb)){
+                takeDamage();//takes damage and then removes bullet. 
+                pb.remove();//this is important becasue 
+                //then when you hit the hull it does no damage
+            }
         }
     }
 }

@@ -2,6 +2,8 @@
 comment0.target=Boss
 comment1.params=p\ stage
 comment1.target=Boss(int,\ com.badlogic.gdx.scenes.scene2d.Stage)
-comment2.params=dt
-comment2.target=void\ act(float)
-numComments=3
+comment2.params=
+comment2.target=void\ takeDamage()
+comment3.params=dt
+comment3.target=void\ act(float)
+numComments=4
