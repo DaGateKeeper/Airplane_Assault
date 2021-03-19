@@ -173,14 +173,14 @@ uiTable.add(Debug).expandX().right().top().pad(20);
                 ShieldLabel.setText("Shields:"+sizeVAR);
 
             }
-            // else if (e.overlaps(player))
-            // {
-                // Explosion exp = new Explosion(0, 0, mainStage);
-                // exp.centerAt(e);
-                // e.remove();
-                // PlayerHealth-=10;
-                // playerLabel.setText("Health:"+PlayerHealth);
-            ///}
+            else if (e.overlaps(player))
+            {
+                Explosion exp = new Explosion(0, 0, mainStage);
+                exp.centerAt(e);
+                e.remove();
+                PlayerHealth-=10;
+                playerLabel.setText("Health:"+PlayerHealth);
+            }
 
             for(BaseActor playerbullet: BaseActor.getList(mainStage,"PlayerBullet"))
             {
@@ -245,6 +245,7 @@ uiTable.add(Debug).expandX().right().top().pad(20);
         
                 }
             }
+            if(Boss.Health<=0){BossD.remove();}
         }
         
         if(PlayerHealth==0){

@@ -22,8 +22,8 @@ public final class Databases
         BOSSSTATS_ = new Bosses[]
         {
             // Initialize all precautionary measure presets here.
-           new Bosses("assets/ships/Boss.png", 1000, 10),
-           new Bosses("assets/ships/Boss.png", 1000, 10)
+           new Bosses("assets/ships/Boss.png", 100, 10),
+           new Bosses("assets/ships/Boss.png", 100, 10)
         };
     }
     

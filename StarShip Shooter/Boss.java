@@ -34,9 +34,6 @@ public class Boss extends BaseActor
 
     public void takeDamage()
     {
-
-        //dex will be the spot in the index the ship is in
-
         Health-=10;
         LevelScreen.Debug.setText("Health:"+ Health);
     }
@@ -87,6 +84,7 @@ public class Boss extends BaseActor
                 pb.remove();//this is important becasue 
                 //then when you hit the hull it does no damage
             }
+            
         }
     }
 }
