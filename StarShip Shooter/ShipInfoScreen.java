@@ -11,36 +11,36 @@ public class ShipInfoScreen extends BaseScreen
     {
         BaseActor background = new BaseActor(0,0, mainStage);
         background.setAnimator( new Animator("assets/water.jpg") );
-        background.setSize(800,640);
+        background.setSize(800,800);
 
+
+        BaseActor ship1 = new BaseActor(0,0,mainStage);
+        ship1.setAnimator(new Animator("assets/ships/player1a.png"));
+        
+        
+        BaseActor ship2 = new BaseActor(0,0,mainStage);
+        ship2.setAnimator(new Animator("assets/ships/player2.png"));
+        
+        BaseActor ship3 = new BaseActor(0,0,mainStage);
+        ship3.setAnimator(new Animator("assets/ships/player3.png"));
+        
         Label title = new Label("Ship Info", BaseGame.labelStyle);
         title.setFontScale(1.5f);
         title.setColor(Color.CYAN);
 
-        BaseActor ship1 = new BaseActor(0,0,mainStage);
-        ship1.setAnimator(new Animator("assets/ships/player1a.png"));
-        ship1.setSize(36,52);
         
-        BaseActor ship2 = new BaseActor(0,0,mainStage);
-        ship2.setAnimator(new Animator("assets/ships/player2.png"));
-        ship2.setSize(36,52);
-        
-        BaseActor ship3 = new BaseActor(0,0,mainStage);
-        ship3.setAnimator(new Animator("assets/ships/player3.png"));
-        ship3.setSize(36,52);
-        
-        Label SpeedyInfo = new Label("Fastest ship, lowest health. Only able to fire one shot!",BaseGame.labelStyle);
-        SpeedyInfo.setFontScale(0.5f);
+        Label SpeedyInfo = new Label("the Fastest ship avaliable \n has the lowest health of the three \n can only fire one shot at a time.",BaseGame.labelStyle);
+        SpeedyInfo.setFontScale(0.3f);
         SpeedyInfo.setColor(Color.CYAN);
 
-        Label AverageInfo = new Label("Average speed Average Health,fires two shots at a time but has no middle shot", BaseGame.labelStyle);
+        Label AverageInfo = new Label("Average Class Fighter of the Game \n standard amount of health and shields \n can fire two shots at a time", BaseGame.labelStyle);
         AverageInfo.setFontScale(0.5f);
         AverageInfo.setColor(Color.CYAN);
 
-        Label DefenseInfo = new Label("Lowest speed Highest Health. Three shot spread fire.",BaseGame.labelStyle);
+        Label DefenseInfo = new Label("The Slowest Ship in the Game \n has the Highest Health \n Three shot spread fire.",BaseGame.labelStyle);
         DefenseInfo.setFontScale(0.5f);
         DefenseInfo.setColor(Color.CYAN);
-
+        
         uiTable.add(title).colspan(2);
         uiTable.row();
         uiTable.add(ship1);

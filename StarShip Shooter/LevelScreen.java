@@ -16,15 +16,15 @@ public class LevelScreen extends BaseScreen
     int SELECTED;
     int score, upgradeNum;
     static Label LivesLabel, Debug, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
-    
+
     Shields shields;
     int maxShieldSize;
     // pixels per second
     int shieldRegenerationRate;
     static double PlayerHealth, debugh;
     public double PlayerShields;
-// some of the above was changed to static so that other classes can see the variables. perhaps that is how we can get around a few of the issues.
-// can't say. only time will tell. Hopefully I will be able to remedy some of the issues that are inherently bad. 
+    // some of the above was changed to static so that other classes can see the variables. perhaps that is how we can get around a few of the issues.
+    // can't say. only time will tell. Hopefully I will be able to remedy some of the issues that are inherently bad. 
     public void initialize()
     {
         new Ocean(0,0, mainStage);
@@ -45,7 +45,7 @@ public class LevelScreen extends BaseScreen
         enemyTimer = 0;
         BossT=10000;
         player = new Player(350, 100, mainStage,SELECTED);
-        
+
         debugh=Databases.getBossStats(0).getHealth();
         Debug= new Label("Health:"+debugh, BaseGame.labelStyle);   
         Debug.setFontScale(0.5f);
@@ -82,7 +82,7 @@ public class LevelScreen extends BaseScreen
         //uiTable.debugCell();
         uiTable.row();
         uiTable.add();
-uiTable.add(Debug).expandX().right().top().pad(20);
+        uiTable.add(Debug).expandX().right().top().pad(20);
     }
 
     public void update(float deltaTime)
@@ -106,11 +106,42 @@ uiTable.add(Debug).expandX().right().top().pad(20);
             shields.setBoundaryPolygon(16);
             ShieldLabel.setText("Shields:"+0);
         }
-        if (Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1)
+
+        if(SELECTED ==0)
         {
-            PlayerBullet pb = new PlayerBullet(0,0, mainStage);
-            pb.centerAt(player);
-            shootTimer=0;
+
+            if (Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1)
+            {
+                PlayerBullet pb = new PlayerBullet(0,0, mainStage);
+                pb.centerAt(player);
+                shootTimer=0;
+            }
+
+        }
+        else if(SELECTED == 1)
+        {
+
+            if (Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1)
+            {
+                PlayerBullet pb = new PlayerBullet(0,10, mainStage);
+                pb.centerAt(player);
+                
+                pb.centerAt(player);
+                shootTimer=0;
+            }
+
+        }
+        else if(SELECTED==2)
+        {
+
+            if(Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1)
+            {
+                PlayerBullet pb = new PlayerBullet(0,0, mainStage);
+
+                pb.centerAt(player);
+                shootTimer=0;
+            }
+
         }
 
         int islandCount = BaseActor.getList(mainStage, "Island").size();
@@ -134,9 +165,9 @@ uiTable.add(Debug).expandX().right().top().pad(20);
             ocean.toBack();
 
         enemyTimer += deltaTime;
-        
+
         BossT+= deltaTime;
-        
+
         if (enemyTimer> 2)
         {
             // spawn new enemy off-screen
@@ -148,10 +179,10 @@ uiTable.add(Debug).expandX().right().top().pad(20);
             enemyTimer = 0;
         }
         // else {
-            if(BossT>100)
+        if(BossT>100)
         {new Boss(1,mainStage);
-        // int BossSpawned=1;
-        BossT=0;
+            // int BossSpawned=1;
+            BossT=0;
         }
 
         for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
@@ -193,7 +224,7 @@ uiTable.add(Debug).expandX().right().top().pad(20);
                     enemyDestroyed++;
                     score+=100;
                     scoreLabel.setText("Score: " + score);
-        
+
                 }
             }
 
@@ -221,7 +252,7 @@ uiTable.add(Debug).expandX().right().top().pad(20);
         {
             if ( BossD.overlaps(shields) && shields.getWidth()>0)
             {
-               
+
                 Explosion explosion = new Explosion(0,0, mainStage);
                 explosion.centerAt(player);
 
@@ -241,13 +272,12 @@ uiTable.add(Debug).expandX().right().top().pad(20);
                 {
                     Explosion exp = new Explosion(0,0,mainStage);
                     exp.centerAt(playerbullet);
-                    
-        
+
                 }
             }
             if(Boss.Health<=0){BossD.remove();}
         }
-        
+
         if(PlayerHealth==0){
             //System.exit(0);
 
