@@ -82,6 +82,7 @@ public class HowToScreen extends BaseScreen
         uiTable.row();
         uiTable.row();
         uiTable.add(MainMenu);
+        uiTable.debugCell();
     }
 
     public void update(float deltaTime)

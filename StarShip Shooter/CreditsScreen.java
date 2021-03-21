@@ -62,7 +62,7 @@ public class CreditsScreen extends BaseScreen
         uiTable.row();
         uiTable.add(StartScreen);
         //uiTable.add(credits);
-
+        uiTable.debugCell();
     }
 
     public void update(float deltaTime)

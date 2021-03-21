@@ -46,7 +46,7 @@ public class PlayerSelect extends BaseScreen
         uiTable.row();
 
         //uiTable.add(credits);
-
+        uiTable.debugCell();
     }
     // this code under here is supposed to take the key and depending on what they choose 
     //it will go to the next screen with that ship as the main one.
