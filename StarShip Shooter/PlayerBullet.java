@@ -1,6 +1,7 @@
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-
+//really it is simple all we need to do is make a second bullet center it at the player 
+//and then change the angle of motion to get it to go in that direction
 public class PlayerBullet extends BaseActor
 {
     public PlayerBullet(float x, float y, Stage stage)
@@ -16,6 +17,8 @@ public class PlayerBullet extends BaseActor
         physics.setMotionAngle(90);
         setSize(30,15);
         setBoundaryRectangle();
+        
+
     }
 
     public void act(float dt)
