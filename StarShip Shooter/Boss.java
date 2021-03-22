@@ -35,7 +35,7 @@ public class Boss extends BaseActor
     public void takeDamage()
     {
         Health-=10;
-        LevelScreen.Debug.setText("Health:"+ Health);
+        //LevelScreen.Debug.setText("Health:"+ Health);
     }
 
     public void act(float dt)

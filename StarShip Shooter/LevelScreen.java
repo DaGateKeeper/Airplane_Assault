@@ -16,7 +16,7 @@ public class LevelScreen extends BaseScreen
     int SELECTED;
     int score, upgradeNum;
     static Label LivesLabel, Debug, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
-
+public boolean BossSummoned;
     Shields shields;
     int maxShieldSize;
     // pixels per second
@@ -43,11 +43,14 @@ public class LevelScreen extends BaseScreen
 
         shootTimer = 1;
         enemyTimer = 0;
-        BossT=10000;
+        BossSummoned= false;
+        //BossT=10000;
         player = new Player(350, 100, mainStage,SELECTED);
 
         debugh=Databases.getBossStats(0).getHealth();
-        Debug= new Label("Health:"+debugh, BaseGame.labelStyle);   
+        //Debug= new Label("Health:"+debugh, BaseGame.labelStyle);
+        Debug= new Label("Destroyed:"+enemyDestroyed, BaseGame.labelStyle);
+        
         Debug.setFontScale(0.5f);
         maxShieldSize = Databases.getPlayerCopy(SELECTED).getSheilds();  
 
@@ -96,7 +99,7 @@ public class LevelScreen extends BaseScreen
             player.physics.accelerateAtAngle(90);
         if (Gdx.input.isKeyPressed(Keys.DOWN))
             player.physics.accelerateAtAngle(270);
-
+            
         // recenter shields on spaceship 
         shields.centerAt( player );
 
@@ -110,7 +113,7 @@ public class LevelScreen extends BaseScreen
         if(SELECTED ==0)
         {
 
-            if (Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1)
+            if (Gdx.input.isKeyPressed(Keys.SPACE) && shootTimer >.25)
             {
                 PlayerBullet pb = new PlayerBullet(0,0, mainStage);
                 pb.centerAt(player);
@@ -168,7 +171,7 @@ public class LevelScreen extends BaseScreen
 
         BossT+= deltaTime;
 
-        if (enemyTimer> 2)
+        if (enemyTimer> 2 && BossSummoned==false)
         {
             // spawn new enemy off-screen
             double RAND=Math.random()*4 + 1;
@@ -179,12 +182,18 @@ public class LevelScreen extends BaseScreen
             enemyTimer = 0;
         }
         // else {
-        if(BossT>100)
-        {new Boss(1,mainStage);
+        //if(BossT>100)
+        //{new Boss(1,mainStage);
             // int BossSpawned=1;
-            BossT=0;
+         //   BossT=0;
+       // }
+       if (enemyDestroyed==5 && Enemy.Count()==0)
+       {
+           new Boss(1,mainStage);
+        BossSummoned=true;
+        enemyDestroyed=0;
         }
-
+        
         for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
         {
 
@@ -224,7 +233,7 @@ public class LevelScreen extends BaseScreen
                     enemyDestroyed++;
                     score+=100;
                     scoreLabel.setText("Score: " + score);
-
+                    Debug.setText("Destroyed" +enemyDestroyed);
                 }
             }
 
@@ -275,7 +284,10 @@ public class LevelScreen extends BaseScreen
 
                 }
             }
-            if(Boss.Health<=0){BossD.remove();}
+            if(Boss.Health<=0){
+                BossSummoned=false;
+                BossD.remove();
+            }
         }
 
         if(PlayerHealth==0){
