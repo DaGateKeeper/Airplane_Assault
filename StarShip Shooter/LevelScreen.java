@@ -187,7 +187,7 @@ public boolean BossSummoned;
             // int BossSpawned=1;
          //   BossT=0;
        // }
-       if (enemyDestroyed==5 && Enemy.Count()==0)
+       if (enemyDestroyed==5)
        {
            new Boss(1,mainStage);
         BossSummoned=true;
@@ -286,7 +286,7 @@ public boolean BossSummoned;
             }
             if(Boss.Health<=0){
                 BossSummoned=false;
-                BossD.remove();
+                BossD.remove();enemyDestroyed=0;
             }
         }
 
