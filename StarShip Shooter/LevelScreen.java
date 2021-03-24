@@ -14,9 +14,9 @@ public class LevelScreen extends BaseScreen
     public float enemyTimer, BossT;
     public int  enemyDestroyed;
     int SELECTED;
-    int score, upgradeNum;
+    int score,playerLives, upgradeNum;
     static Label LivesLabel, Debug, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
-public boolean BossSummoned;
+    public boolean BossSummoned;
     Shields shields;
     int maxShieldSize;
     // pixels per second
@@ -43,6 +43,7 @@ public boolean BossSummoned;
 
         shootTimer = 1;
         enemyTimer = 0;
+        playerLives= 3; // the amount of lives for the player. 
         BossSummoned= false;
         //BossT=10000;
         player = new Player(350, 100, mainStage,SELECTED);
@@ -50,7 +51,7 @@ public boolean BossSummoned;
         debugh=Databases.getBossStats(0).getHealth();
         //Debug= new Label("Health:"+debugh, BaseGame.labelStyle);
         Debug= new Label("Destroyed:"+enemyDestroyed, BaseGame.labelStyle);
-        
+
         Debug.setFontScale(0.5f);
         maxShieldSize = Databases.getPlayerCopy(SELECTED).getSheilds();  
 
@@ -61,15 +62,15 @@ public boolean BossSummoned;
         shields.centerAt(player);
         shieldRegenerationRate = 1;
 
-        PlayerHealth= Databases.getPlayerCopy(SELECTED).getHealth();
-        PlayerShields=Databases.getPlayerCopy(SELECTED).getSheilds();
+        PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
+        PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
 
         score = 0; 
         scoreLabel = new Label("Score: " + score, BaseGame.labelStyle);scoreLabel.setFontScale(0.5f);
         playerLabel = new Label("Health:"+PlayerHealth, BaseGame.labelStyle);   
         playerLabel.setFontScale(0.5f);
         upgradeLabel = new Label("Upgrades: " + upgradeNum, BaseGame.labelStyle);upgradeLabel.setFontScale(0.5f);
-        LivesLabel= new Label("Lives: ", BaseGame.labelStyle);LivesLabel.setFontScale(0.5f);
+        LivesLabel= new Label("Lives:" +playerLives, BaseGame.labelStyle);LivesLabel.setFontScale(0.5f);
         HIscoreLabel= new Label("Highscores ", BaseGame.labelStyle);HIscoreLabel.setFontScale(0.5f);
         ShieldLabel= new Label("Shields:"+PlayerShields, BaseGame.labelStyle);ShieldLabel.setFontScale(0.5f);
 
@@ -99,7 +100,7 @@ public boolean BossSummoned;
             player.physics.accelerateAtAngle(90);
         if (Gdx.input.isKeyPressed(Keys.DOWN))
             player.physics.accelerateAtAngle(270);
-            
+
         // recenter shields on spaceship 
         shields.centerAt( player );
 
@@ -128,7 +129,7 @@ public boolean BossSummoned;
             {
                 PlayerBullet pb = new PlayerBullet(0,10, mainStage);
                 pb.centerAt(player);
-                
+
                 pb.centerAt(player);
                 shootTimer=0;
             }
@@ -184,16 +185,16 @@ public boolean BossSummoned;
         // else {
         //if(BossT>100)
         //{new Boss(1,mainStage);
-            // int BossSpawned=1;
-         //   BossT=0;
-       // }
-       if (enemyDestroyed==5)
-       {
-           new Boss(1,mainStage);
-        BossSummoned=true;
-        enemyDestroyed=0;
+        // int BossSpawned=1;
+        //   BossT=0;
+        // }
+        if (enemyDestroyed==5)
+        {
+            new Boss(1,mainStage);
+            BossSummoned=true;
+            enemyDestroyed=0;
         }
-        
+
         for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
         {
 
@@ -238,6 +239,7 @@ public boolean BossSummoned;
             }
 
         }
+
         for(BaseActor eb :BaseActor.getList(mainStage, "EnemyBullet"))   
         {
             if ( eb.overlaps(shields) && shields.getWidth()>0)
@@ -257,6 +259,7 @@ public boolean BossSummoned;
 
             }
         }
+
         for(BaseActor BossD :BaseActor.getList(mainStage, "Boss"))   
         {
             if ( BossD.overlaps(shields) && shields.getWidth()>0)
@@ -274,7 +277,8 @@ public boolean BossSummoned;
                 shields.setBoundaryPolygon(8);
                 ShieldLabel.setText("Shields:"+sizeVAR);
 
-            }            
+            }
+
             for(BaseActor playerbullet: BaseActor.getList(mainStage,"PlayerBullet"))
             {
                 if(playerbullet.overlaps(BossD))
@@ -284,16 +288,30 @@ public boolean BossSummoned;
 
                 }
             }
+
             if(Boss.Health<=0){
                 BossSummoned=false;
                 BossD.remove();enemyDestroyed=0;
             }
         }
 
-        if(PlayerHealth==0){
-            //System.exit(0);
+        //managed to get a working lives system going for now...though there are errors with it
+        //including the issue of not tracking the other ships except for speedy.. or having the second spawned ship not being able
+        //to be controlled.. This is a good bases though
+        for(BaseActor player: BaseActor.getList(mainStage,"Player"))
+        {
+            if(PlayerHealth==0){
+                Explosion exp = new Explosion(0,0,mainStage);
+                exp.centerAt(player);
 
+                player.remove();
+                playerLives--;
+
+                player = new Player(350, 100, mainStage,SELECTED);
+                PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
+                PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
+
+            }
         }
-
     }
 }
