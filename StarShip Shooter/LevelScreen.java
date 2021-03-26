@@ -306,11 +306,19 @@ public class LevelScreen extends BaseScreen
                 {
                     Explosion exp = new Explosion(0,0,mainStage);
                     exp.centerAt(player);
-
+                    
                     player.remove();
+                    shields.remove();
+                    
                     player = new Player(350, 100, mainStage,SELECTED);
+                    shields = new Shields(0,0, mainStage);
                     PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
                     PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
+                    
+                    
+                    PlayerBullet pb = new PlayerBullet(0,10, mainStage);
+                    pb.centerAt(player);
+                    shields.centerAt(player);
                     
                     playerLives--;
                     
