@@ -172,7 +172,7 @@ public class LevelScreen extends BaseScreen
 
         BossT+= deltaTime;
 
-        if (enemyTimer> 2 && BossSummoned==false)
+        if (enemyTimer> .5 && BossSummoned==false)
         {
             // spawn new enemy off-screen
             double RAND=Math.random()*4 + 1;
@@ -298,57 +298,25 @@ public class LevelScreen extends BaseScreen
         //managed to get a working lives system going for now...though there are errors with it
         //the second spawned ship not being able
         //to be controlled.. This is a good bases though
-        for(BaseActor player: BaseActor.getList(mainStage,"Player"))
+
+        if(PlayerHealth <= 0)
         {
-            if(SELECTED ==0)
-            {
-                if(PlayerHealth <= 0)
-                {
-                    Explosion exp = new Explosion(0,0,mainStage);
-                    exp.centerAt(player);
-
-                    player.remove();
-                    player = new Player(350, 100, mainStage,SELECTED);
-                    PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
-                    PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
-                    
-                    playerLives--;
-                    
-                }
-            }
-
-            else if (SELECTED ==1)
-            {
-                if(PlayerHealth <= 0)
-                {
-                    Explosion exp = new Explosion(0,0,mainStage);
-                    exp.centerAt(player);
-
-                    player.remove();
-                    player = new Player(350, 100, mainStage,SELECTED);
-                    PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
-                    PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
-                    
-                    playerLives--;
-                }
-            }
-
-            else if (SELECTED ==2)
-            {
-                if(PlayerHealth <= 0)
-                {
-                    Explosion exp = new Explosion(0,0,mainStage);
-                    exp.centerAt(player);
-
-                    player.remove();
-                    player = new Player(350, 100, mainStage,SELECTED);
-                    PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
-                    PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
-                    
-                    playerLives--;
-                }
-            }
-
+            Explosion exp = new Explosion(0,0,mainStage);
+            exp.centerAt(player);
+            player.remove();
+            playerLives--;
+            player = new Player(350, 100, mainStage,SELECTED);
+            PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
+            PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
+            shields = new Shields(0,0, mainStage);
+            shields.setSize( maxShieldSize, maxShieldSize );
+            shields.setBoundaryPolygon(8);
+            // attach shield object to spaceship object
+            shields.centerAt(player);
+            shieldRegenerationRate = 1;
+            update(0);
         }
+
+      
     }
 }
