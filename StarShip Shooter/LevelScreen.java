@@ -296,22 +296,59 @@ public class LevelScreen extends BaseScreen
         }
 
         //managed to get a working lives system going for now...though there are errors with it
-        //including the issue of not tracking the other ships except for speedy.. or having the second spawned ship not being able
+        //the second spawned ship not being able
         //to be controlled.. This is a good bases though
         for(BaseActor player: BaseActor.getList(mainStage,"Player"))
         {
-            if(PlayerHealth==0){
-                Explosion exp = new Explosion(0,0,mainStage);
-                exp.centerAt(player);
+            if(SELECTED ==0)
+            {
+                if(PlayerHealth <= 0)
+                {
+                    Explosion exp = new Explosion(0,0,mainStage);
+                    exp.centerAt(player);
 
-                player.remove();
-                playerLives--;
-
-                player = new Player(350, 100, mainStage,SELECTED);
-                PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
-                PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
-
+                    player.remove();
+                    player = new Player(350, 100, mainStage,SELECTED);
+                    PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
+                    PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
+                    
+                    playerLives--;
+                    
+                }
             }
+
+            else if (SELECTED ==1)
+            {
+                if(PlayerHealth <= 0)
+                {
+                    Explosion exp = new Explosion(0,0,mainStage);
+                    exp.centerAt(player);
+
+                    player.remove();
+                    player = new Player(350, 100, mainStage,SELECTED);
+                    PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
+                    PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
+                    
+                    playerLives--;
+                }
+            }
+
+            else if (SELECTED ==2)
+            {
+                if(PlayerHealth <= 0)
+                {
+                    Explosion exp = new Explosion(0,0,mainStage);
+                    exp.centerAt(player);
+
+                    player.remove();
+                    player = new Player(350, 100, mainStage,SELECTED);
+                    PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
+                    PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
+                    
+                    playerLives--;
+                }
+            }
+
         }
     }
 }
