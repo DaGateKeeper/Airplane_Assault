@@ -244,7 +244,7 @@ public class LevelScreen extends BaseScreen
                 PlayerHealth-=10;
                 playerLabel.setText("Health:"+PlayerHealth);
             }
-
+            float itemChance = 0.5f;
             for(BaseActor playerbullet: BaseActor.getList(mainStage,"PlayerBullet"))
             {
 
@@ -258,15 +258,19 @@ public class LevelScreen extends BaseScreen
                     score+=100;
                     scoreLabel.setText("Score: " + score);
                     Debug.setText("Destroyed" +enemyDestroyed);
+                    if(Math.random() <itemChance)
+                    {
+                        PowerUps item = new PowerUps(0 , 0, mainStage);
+                        item.centerAt(e);
+                    }
+                    //float itemChance = 0.5f;
+                    //if(Math.random() <itemChance)
+                    //{
+                    //    PowerUps item = new PowerUps(0 , 0, mainStage);
+                    //    item.centerAt(e);
                 }
-                //float itemChance = 0.5f;
-                //if(Math.random() <itemChance)
-                //{
-                //    PowerUps item = new PowerUps(0 , 0, mainStage);
-                //    item.centerAt(e);
-            }
 
-        }
+            }}
 
         //for(BaseActor actor : BaseActor.getList (mainStage, "PowerUps"))
         //{
@@ -384,23 +388,23 @@ public class LevelScreen extends BaseScreen
 
         //if(playerLives ==0)
         //{
-           // player.remove();
-            //if(score>highScore)
-            //{
-                //try
-                //{
-                    //File f = new File("highScore.txt");
-                    //PrintWriter pw = new PrintWriter(f);
-                    
-                    //pw.print(highScore);
-                    //pw.close();
-                //}
-               // catch(Exception error)
+        // player.remove();
+        //if(score>highScore)
+        //{
+        //try
+        //{
+        //File f = new File("highScore.txt");
+        //PrintWriter pw = new PrintWriter(f);
 
-                //{
-                  //  error.printStackTrace();
-               //}
-           // }
+        //pw.print(highScore);
+        //pw.close();
+        //}
+        // catch(Exception error)
+
+        //{
+        //  error.printStackTrace();
+        //}
+        // }
         //}
 
     }
