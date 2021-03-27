@@ -7,6 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.audio.Music;
 
+// for storing and retrieving high scores in a text file
+import java.io.File;
+import java.util.Scanner;
+import java.io.PrintWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 public class LevelScreen extends BaseScreen
 {
     public float shootTimer;
@@ -14,6 +21,7 @@ public class LevelScreen extends BaseScreen
     public float enemyTimer, BossT;
     public int  enemyDestroyed;
     int SELECTED;
+    int highScore;
     int score,playerLives, upgradeNum;
     static Label LivesLabel, Debug, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
     public boolean BossSummoned;
@@ -23,6 +31,7 @@ public class LevelScreen extends BaseScreen
     int shieldRegenerationRate;
     static double PlayerHealth, debugh;
     public double PlayerShields;
+
     // some of the above was changed to static so that other classes can see the variables. perhaps that is how we can get around a few of the issues.
     // can't say. only time will tell. Hopefully I will be able to remedy some of the issues that are inherently bad. 
     public void initialize()
@@ -66,12 +75,13 @@ public class LevelScreen extends BaseScreen
         PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
 
         score = 0; 
+        highScore=0;
         scoreLabel = new Label("Score: " + score, BaseGame.labelStyle);scoreLabel.setFontScale(0.5f);
         playerLabel = new Label("Health:"+PlayerHealth, BaseGame.labelStyle);   
         playerLabel.setFontScale(0.5f);
         upgradeLabel = new Label("Upgrades: " + upgradeNum, BaseGame.labelStyle);upgradeLabel.setFontScale(0.5f);
         LivesLabel= new Label("Lives:" +playerLives, BaseGame.labelStyle);LivesLabel.setFontScale(0.5f);
-        HIscoreLabel= new Label("Highscores ", BaseGame.labelStyle);HIscoreLabel.setFontScale(0.5f);
+        HIscoreLabel= new Label("Highscores " +highScore, BaseGame.labelStyle);HIscoreLabel.setFontScale(0.5f);
         ShieldLabel= new Label("Shields:"+PlayerShields, BaseGame.labelStyle);ShieldLabel.setFontScale(0.5f);
 
         uiTable.add( playerLabel ).expandX().expandY().left().top().pad(20);
@@ -87,6 +97,19 @@ public class LevelScreen extends BaseScreen
         uiTable.row();
         uiTable.add();
         uiTable.add(Debug).expandX().right().top().pad(20);
+
+        File f = new File("highScore.txt");
+        try
+        {
+            Scanner scan = new Scanner(f);
+            highScore = scan.nextInt();
+        }
+        catch (Exception error)
+        {
+            // error.printStackTrace();
+            highScore = 0;
+        }
+
     }
 
     public void update(float deltaTime)
@@ -197,7 +220,6 @@ public class LevelScreen extends BaseScreen
 
         for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
         {
-
             if ( e.overlaps(shields) && shields.getWidth()>0)
             {
                 e.remove();
@@ -225,6 +247,7 @@ public class LevelScreen extends BaseScreen
 
             for(BaseActor playerbullet: BaseActor.getList(mainStage,"PlayerBullet"))
             {
+
                 if(playerbullet.overlaps(e))
                 {
                     Explosion exp = new Explosion(0,0,mainStage);
@@ -236,9 +259,48 @@ public class LevelScreen extends BaseScreen
                     scoreLabel.setText("Score: " + score);
                     Debug.setText("Destroyed" +enemyDestroyed);
                 }
+                //float itemChance = 0.5f;
+                //if(Math.random() <itemChance)
+                //{
+                //    PowerUps item = new PowerUps(0 , 0, mainStage);
+                //    item.centerAt(e);
             }
 
         }
+
+        //for(BaseActor actor : BaseActor.getList (mainStage, "PowerUps"))
+        //{
+        //PowerUps item = (PowerUps)actor;
+        //if(player.overlaps(item))
+        //{
+        //switch(item.imageName)
+        //{
+        //case "x2":
+        //score=score*2;
+        //scoreLabel.setText("Score: " + score);
+
+        //case "x4":
+        //score=score*4;
+        // scoreLabel.setText("Score: " + score);
+
+        //case "x6":
+        // score = score*6;
+        //scoreLabel.setText("Score: " + score);
+
+        //case "x8":
+        //score = score*8;
+        //scoreLabel.setText("Score: " +score);
+
+        //case "x10":
+        //score = score * 10;
+        //scoreLabel.setText("Score:" + score);
+
+        //case "health":
+        //PlayerHealth+=20;
+        //playerLabel.setText("Health:"+PlayerHealth);
+        //}
+        //}
+        //}
 
         for(BaseActor eb :BaseActor.getList(mainStage, "EnemyBullet"))   
         {
@@ -305,8 +367,11 @@ public class LevelScreen extends BaseScreen
             exp.centerAt(player);
             player.remove();
             playerLives--;
+            LivesLabel.setText("Lives"+playerLives);
+
             player = new Player(350, 100, mainStage,SELECTED);
             PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
+            playerLabel.setText("Health:"+PlayerHealth);
             PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
             shields = new Shields(0,0, mainStage);
             shields.setSize( maxShieldSize, maxShieldSize );
@@ -317,6 +382,26 @@ public class LevelScreen extends BaseScreen
             update(0);
         }
 
-      
+        //if(playerLives ==0)
+        //{
+           // player.remove();
+            //if(score>highScore)
+            //{
+                //try
+                //{
+                    //File f = new File("highScore.txt");
+                    //PrintWriter pw = new PrintWriter(f);
+                    
+                    //pw.print(highScore);
+                    //pw.close();
+                //}
+               // catch(Exception error)
+
+                //{
+                  //  error.printStackTrace();
+               //}
+           // }
+        //}
+
     }
 }

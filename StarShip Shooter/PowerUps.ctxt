@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=PowerUps
+comment0.text=\r\n\ Powerups\ class\ which\ helps\ to\ create\ all\ of\ our\ powerups\ in\ the\ game\r\n\ for\ the\ score\ \r\n\r\n\ James\ Meurer\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=x\ y\ s
+comment1.target=PowerUps(float,\ float,\ com.badlogic.gdx.scenes.scene2d.Stage)
+comment2.params=deltaTime
+comment2.target=void\ act(float)
+numComments=3
