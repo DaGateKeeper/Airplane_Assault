@@ -134,42 +134,37 @@ public class LevelScreen extends BaseScreen
             ShieldLabel.setText("Shields:"+0);
         }
 
-        if(SELECTED ==0)
-        {
-
+        if(SELECTED ==0)//change this later
+        { // **************TESTING IN PROGRESS#############TRIPLE SHOT
             if (Gdx.input.isKeyPressed(Keys.SPACE) && shootTimer >.25)
             {
-                PlayerBullet pb = new PlayerBullet(0,0, mainStage);
-                pb.centerAt(player);
+                for(int a=1;a<4;a++){
+                    int b= 60;
+                    PlayerBullet pb = new PlayerBullet(0,0, mainStage);
+                    pb.setRotation(b+(15*a));
+                    pb.physics.setMotionAngle(b+(15*a)); 
+                    pb.centerAt(player);
+                    
+                }
                 shootTimer=0;
             }
-
-        }
-        else if(SELECTED == 1)
-        {
-
-            if (Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1)
-            {
-                PlayerBullet pb = new PlayerBullet(0,10, mainStage);
-                pb.centerAt(player);
-
-                pb.centerAt(player);
-                shootTimer=0;
-            }
-
         }
         else if(SELECTED==2)
         {
-
             if(Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1)
             {
                 PlayerBullet pb = new PlayerBullet(0,0, mainStage);
-
                 pb.centerAt(player);
                 shootTimer=0;
             }
-
         }
+        else{
+            if(Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1)
+            {
+                PlayerBullet pb = new PlayerBullet(0,0, mainStage);
+                pb.centerAt(player);
+                shootTimer=0;
+            }}
 
         int islandCount = BaseActor.getList(mainStage, "Island").size();
         if ( islandCount < 2 && Math.random() < 0.03 )
