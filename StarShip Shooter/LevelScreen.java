@@ -256,7 +256,7 @@ public class LevelScreen extends BaseScreen
                     e.remove();
                     enemyDestroyed++;
                     score+=100;
-                    scoreLabel.setText("Score: " + score);
+
                     Debug.setText("Destroyed" +enemyDestroyed);
                     if(Math.random() <itemChance)
                     {
@@ -269,42 +269,48 @@ public class LevelScreen extends BaseScreen
                     //    PowerUps item = new PowerUps(0 , 0, mainStage);
                     //    item.centerAt(e);
                 }
+                scoreLabel.setText("Score: " + score);
 
             }}
 
-        //for(BaseActor actor : BaseActor.getList (mainStage, "PowerUps"))
-        //{
-        //PowerUps item = (PowerUps)actor;
-        //if(player.overlaps(item))
-        //{
-        //switch(item.imageName)
-        //{
-        //case "x2":
-        //score=score*2;
-        //scoreLabel.setText("Score: " + score);
+        for(BaseActor actor : BaseActor.getList (mainStage, "PowerUps"))
+        {
+            PowerUps item = (PowerUps)actor;
+            if(player.overlaps(item))
+            {
+                item.remove();
+                switch(item.imageName)
+                {
+                    
+                    //will have to work on this at somepoint.. may have to remove the x10 powerup to prevent score overflow...
+                    //perhaps just keep the x4 instead.
+                    
+                    //case "x2":
+                    //score= score*2;
+                    //scoreLabel.setText("Score: " + score);
 
-        //case "x4":
-        //score=score*4;
-        // scoreLabel.setText("Score: " + score);
+                    //case "x4":
+                    //score= score*4;
+                    //scoreLabel.setText("Score: " + score);
 
-        //case "x6":
-        // score = score*6;
-        //scoreLabel.setText("Score: " + score);
+                    //case "x6":
+                    //score = score*6;
+                    //scoreLabel.setText("Score: " + score);
 
-        //case "x8":
-        //score = score*8;
-        //scoreLabel.setText("Score: " +score);
+                    //case "x8":
+                    //score = score*8;
+                    //scoreLabel.setText("Score: " +score);
 
-        //case "x10":
-        //score = score * 10;
-        //scoreLabel.setText("Score:" + score);
+                    //case "x10":
+                    //score = score * 10;
+                    //scoreLabel.setText("Score:" + score);
 
-        //case "health":
-        //PlayerHealth+=20;
-        //playerLabel.setText("Health:"+PlayerHealth);
-        //}
-        //}
-        //}
+                    //case "health":
+                    //PlayerHealth +=20;
+                    //playerLabel.setText("Health:"+PlayerHealth);
+                }
+            }
+        }
 
         for(BaseActor eb :BaseActor.getList(mainStage, "EnemyBullet"))   
         {
