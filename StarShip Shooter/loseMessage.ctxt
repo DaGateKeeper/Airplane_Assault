@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=loseMessage
+comment0.text=\r\n\ class\ for\ testing\ highscore\ for\ now...\r\n
+comment1.params=x\ y\ s
+comment1.target=loseMessage(float,\ float,\ com.badlogic.gdx.scenes.scene2d.Stage)
+comment2.params=deltaTime
+comment2.target=void\ act(float)
+numComments=3

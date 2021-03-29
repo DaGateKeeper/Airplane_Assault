@@ -32,6 +32,10 @@ public class LevelScreen extends BaseScreen
     static double PlayerHealth, debugh;
     public double PlayerShields;
 
+    //again this part here was for testing highscore to see if
+    //it was actually saving the score we would get. 
+    loseMessage loseMessage; 
+
     // some of the above was changed to static so that other classes can see the variables. perhaps that is how we can get around a few of the issues.
     // can't say. only time will tell. Hopefully I will be able to remedy some of the issues that are inherently bad. 
     public void initialize()
@@ -75,13 +79,12 @@ public class LevelScreen extends BaseScreen
         PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
 
         score = 0; 
-        highScore=0;
         scoreLabel = new Label("Score: " + score, BaseGame.labelStyle);scoreLabel.setFontScale(0.5f);
         playerLabel = new Label("Health:"+PlayerHealth, BaseGame.labelStyle);   
         playerLabel.setFontScale(0.5f);
         upgradeLabel = new Label("Upgrades: " + upgradeNum, BaseGame.labelStyle);upgradeLabel.setFontScale(0.5f);
         LivesLabel= new Label("Lives:" +playerLives, BaseGame.labelStyle);LivesLabel.setFontScale(0.5f);
-        HIscoreLabel= new Label("Highscores " +highScore, BaseGame.labelStyle);HIscoreLabel.setFontScale(0.5f);
+        HIscoreLabel= new Label("Highscores " + highScore, BaseGame.labelStyle);HIscoreLabel.setFontScale(0.5f);
         ShieldLabel= new Label("Shields:"+PlayerShields, BaseGame.labelStyle);ShieldLabel.setFontScale(0.5f);
 
         uiTable.add( playerLabel ).expandX().expandY().left().top().pad(20);
@@ -97,6 +100,9 @@ public class LevelScreen extends BaseScreen
         uiTable.row();
         uiTable.add();
         uiTable.add(Debug).expandX().right().top().pad(20);
+
+        loseMessage=new loseMessage(200,0,mainStage);
+        loseMessage.setVisible(false);
 
         File f = new File("highScore.txt");
         try
@@ -144,7 +150,7 @@ public class LevelScreen extends BaseScreen
                     pb.setRotation(b+(15*a));
                     pb.physics.setMotionAngle(b+(15*a)); 
                     pb.centerAt(player);
-                    
+
                 }
                 shootTimer=0;
             }
@@ -276,10 +282,10 @@ public class LevelScreen extends BaseScreen
                 item.remove();
                 switch(item.imageName)
                 {
-                    
+
                     //will have to work on this at somepoint.. may have to remove the x10 powerup to prevent score overflow...
                     //perhaps just keep the x4 instead.
-                    
+
                     //case "x2":
                     //score= score*2;
                     //scoreLabel.setText("Score: " + score);
@@ -387,26 +393,30 @@ public class LevelScreen extends BaseScreen
             update(0);
         }
 
-        //if(playerLives ==0)
-        //{
-        // player.remove();
-        //if(score>highScore)
-        //{
-        //try
-        //{
-        //File f = new File("highScore.txt");
-        //PrintWriter pw = new PrintWriter(f);
+        if(playerLives ==0)
+        {
 
-        //pw.print(highScore);
-        //pw.close();
-        //}
-        // catch(Exception error)
+            loseMessage.setVisible(true);
+            loseMessage.addAction(
+                Actions.moveTo(200,350,1.5f));
+            if(score>highScore)
+            {
+                highScore = score;
+                try
+                {
+                    File f = new File("highScore.txt");
+                    PrintWriter pw = new PrintWriter(f);
 
-        //{
-        //  error.printStackTrace();
-        //}
-        // }
-        //}
+                    pw.print(highScore);
+                    pw.close();
+                }
+                catch(Exception error)
+
+                {
+                    error.printStackTrace();
+                }
+            }
+        }
 
     }
 }
