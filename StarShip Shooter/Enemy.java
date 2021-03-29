@@ -72,7 +72,7 @@ public class Enemy extends BaseActor
         // enemy must be above player:
         //  && this.getY() > player.getY()
 
-        if ( shootTimer > 1 )
+        if ( shootTimer > 1)
         {
             //EnemyBullet eb = new EnemyBullet(0,0, getStage());
            // eb.centerAt(this);

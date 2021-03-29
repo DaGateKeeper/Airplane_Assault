@@ -22,7 +22,7 @@ public class LevelScreen extends BaseScreen
     public int  enemyDestroyed;
     int SELECTED;
     int highScore;
-    int score,playerLives, upgradeNum;
+    int score, upgradeNum;
     static Label LivesLabel, Debug, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
     public boolean BossSummoned;
     Shields shields;
@@ -35,7 +35,7 @@ public class LevelScreen extends BaseScreen
     //again this part here was for testing highscore to see if
     //it was actually saving the score we would get. 
     loseMessage loseMessage; 
-
+int playerLives= 1; // the amount of lives for the player. 
     // some of the above was changed to static so that other classes can see the variables. perhaps that is how we can get around a few of the issues.
     // can't say. only time will tell. Hopefully I will be able to remedy some of the issues that are inherently bad. 
     public void initialize()
@@ -56,7 +56,7 @@ public class LevelScreen extends BaseScreen
 
         shootTimer = 1;
         enemyTimer = 0;
-        playerLives= 3; // the amount of lives for the player. 
+       playerLives= 1; // the amount of lives for the player. 
         BossSummoned= false;
         //BossT=10000;
         player = new Player(350, 100, mainStage,SELECTED);
@@ -121,6 +121,7 @@ public class LevelScreen extends BaseScreen
     public void update(float deltaTime)
     {
         shootTimer +=deltaTime;
+        
         if (Gdx.input.isKeyPressed(Keys.LEFT))
             player.physics.accelerateAtAngle(180);
         if (Gdx.input.isKeyPressed(Keys.RIGHT))
@@ -142,7 +143,7 @@ public class LevelScreen extends BaseScreen
 
         if(SELECTED ==0)//change this later
         { // **************TESTING IN PROGRESS#############TRIPLE SHOT
-            if (Gdx.input.isKeyPressed(Keys.SPACE) && shootTimer >.25)
+            if (Gdx.input.isKeyPressed(Keys.SPACE) && shootTimer >.25 && player.isOnStage())
             {
                 for(int a=1;a<4;a++){
                     int b= 60;
@@ -157,7 +158,7 @@ public class LevelScreen extends BaseScreen
         }
         else if(SELECTED==2)
         {
-            if(Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1)
+            if(Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1&& player.isOnStage())
             {
                 PlayerBullet pb = new PlayerBullet(0,0, mainStage);
                 pb.centerAt(player);
@@ -165,7 +166,7 @@ public class LevelScreen extends BaseScreen
             }
         }
         else{
-            if(Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1)
+            if(Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1&& player.isOnStage())
             {
                 PlayerBullet pb = new PlayerBullet(0,0, mainStage);
                 pb.centerAt(player);
@@ -196,7 +197,7 @@ public class LevelScreen extends BaseScreen
 
         BossT+= deltaTime;
 
-        if (enemyTimer> .5 && BossSummoned==false)
+        if (enemyTimer> .5 && BossSummoned==false && player.isOnStage())
         {
             // spawn new enemy off-screen
             double RAND=Math.random()*4 + 1;
@@ -372,30 +373,13 @@ public class LevelScreen extends BaseScreen
         //the second spawned ship not being able
         //to be controlled.. This is a good bases though
 
-        if(PlayerHealth <= 0)
+        if(PlayerHealth <= 0&& playerLives<=0)
         {
-            Explosion exp = new Explosion(0,0,mainStage);
-            exp.centerAt(player);
+            
             player.remove();
-            playerLives--;
-            LivesLabel.setText("Lives"+playerLives);
-
-            player = new Player(350, 100, mainStage,SELECTED);
-            PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
-            playerLabel.setText("Health:"+PlayerHealth);
-            PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
-            shields = new Shields(0,0, mainStage);
-            shields.setSize( maxShieldSize, maxShieldSize );
-            shields.setBoundaryPolygon(8);
-            // attach shield object to spaceship object
-            shields.centerAt(player);
-            shieldRegenerationRate = 1;
-            update(0);
-        }
-
-        if(playerLives ==0)
+            for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
         {
-
+            e.remove();}
             loseMessage.setVisible(true);
             loseMessage.addAction(
                 Actions.moveTo(200,350,1.5f));
@@ -416,6 +400,26 @@ public class LevelScreen extends BaseScreen
                     error.printStackTrace();
                 }
             }
+           
+        }else if(PlayerHealth<0)
+        {
+            Explosion exp = new Explosion(0,0,mainStage);
+            exp.centerAt(player);
+            player.remove();
+            playerLives--;
+            LivesLabel.setText("Lives"+playerLives);
+
+            player = new Player(350, 100, mainStage,SELECTED);
+            PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
+            playerLabel.setText("Health:"+PlayerHealth);
+            PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
+            shields = new Shields(0,0, mainStage);
+            shields.setSize( maxShieldSize, maxShieldSize );
+            shields.setBoundaryPolygon(8);
+            // attach shield object to spaceship object
+            shields.centerAt(player);
+            shieldRegenerationRate = 1;
+            update(0);
         }
 
     }
