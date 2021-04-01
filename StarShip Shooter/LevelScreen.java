@@ -35,7 +35,7 @@ public class LevelScreen extends BaseScreen
     //again this part here was for testing highscore to see if
     //it was actually saving the score we would get. 
     loseMessage loseMessage; 
-int playerLives= 1; // the amount of lives for the player. 
+    int playerLives= 1; // the amount of lives for the player. 
     // some of the above was changed to static so that other classes can see the variables. perhaps that is how we can get around a few of the issues.
     // can't say. only time will tell. Hopefully I will be able to remedy some of the issues that are inherently bad. 
     public void initialize()
@@ -56,7 +56,7 @@ int playerLives= 1; // the amount of lives for the player.
 
         shootTimer = 1;
         enemyTimer = 0;
-       playerLives= 1; // the amount of lives for the player. 
+        playerLives= 1; // the amount of lives for the player. 
         BossSummoned= false;
         //BossT=10000;
         player = new Player(350, 100, mainStage,SELECTED);
@@ -77,6 +77,19 @@ int playerLives= 1; // the amount of lives for the player.
 
         PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
         PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
+
+        //the file needs to go first in order to save the highscore..
+        File f = new File("highScore.txt");
+        try
+        {
+            Scanner scan = new Scanner(f);
+            highScore = scan.nextInt();
+        }
+        catch (Exception error)
+        {
+            // error.printStackTrace();
+            highScore = 0;
+        }
 
         score = 0; 
         scoreLabel = new Label("Score: " + score, BaseGame.labelStyle);scoreLabel.setFontScale(0.5f);
@@ -104,24 +117,13 @@ int playerLives= 1; // the amount of lives for the player.
         loseMessage=new loseMessage(200,0,mainStage);
         loseMessage.setVisible(false);
 
-        File f = new File("highScore.txt");
-        try
-        {
-            Scanner scan = new Scanner(f);
-            highScore = scan.nextInt();
-        }
-        catch (Exception error)
-        {
-            // error.printStackTrace();
-            highScore = 0;
-        }
 
     }
 
     public void update(float deltaTime)
     {
         shootTimer +=deltaTime;
-        
+
         if (Gdx.input.isKeyPressed(Keys.LEFT))
             player.physics.accelerateAtAngle(180);
         if (Gdx.input.isKeyPressed(Keys.RIGHT))
@@ -294,21 +296,13 @@ int playerLives= 1; // the amount of lives for the player.
                     //case "x4":
                     //score= score*4;
                     //scoreLabel.setText("Score: " + score);
+                    
 
-                    //case "x6":
-                    //score = score*6;
-                    //scoreLabel.setText("Score: " + score);
 
-                    //case "x8":
-                    //score = score*8;
-                    //scoreLabel.setText("Score: " +score);
-
-                    //case "x10":
-                    //score = score * 10;
-                    //scoreLabel.setText("Score:" + score);
-
+                    //need to set a limit on how much health each ship could have... After all we don't want players to go over board
+                    //and get to overpowered with health.. perhaps up to five hundred. would need a statement to go here..
                     //case "health":
-                    //PlayerHealth +=20;
+                    //PlayerHealth +=10;
                     //playerLabel.setText("Health:"+PlayerHealth);
                 }
             }
@@ -375,11 +369,11 @@ int playerLives= 1; // the amount of lives for the player.
 
         if(PlayerHealth <= 0&& playerLives<=0)
         {
-            
+
             player.remove();
             for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
-        {
-            e.remove();}
+            {
+                e.remove();}
             loseMessage.setVisible(true);
             loseMessage.addAction(
                 Actions.moveTo(200,350,1.5f));
@@ -400,7 +394,7 @@ int playerLives= 1; // the amount of lives for the player.
                     error.printStackTrace();
                 }
             }
-           
+
         }else if(PlayerHealth<0)
         {
             Explosion exp = new Explosion(0,0,mainStage);
