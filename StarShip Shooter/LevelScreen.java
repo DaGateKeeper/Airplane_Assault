@@ -32,6 +32,8 @@ public class LevelScreen extends BaseScreen
     static double PlayerHealth, debugh;
     public double PlayerShields;
 
+    public Sound explodeSound, EnemyShootA, PlayerShootA, BossSpawn, PlayerHit, itemCollect, PHs;
+    public Music MenuTrack, LevelTrack, PHm;
     //again this part here was for testing highscore to see if
     //it was actually saving the score we would get. 
     loseMessage loseMessage; 
@@ -117,7 +119,13 @@ public class LevelScreen extends BaseScreen
         loseMessage=new loseMessage(200,0,mainStage);
         loseMessage.setVisible(false);
 
-
+        PHm= Gdx.audio.newMusic( Gdx.files.internal("assets/audio/bgm/Safe.ogg"));//music
+        PHs= Gdx.audio.newSound( Gdx.files.internal("assets/audio/sfx/Missile-Launch.wav"));//auido
+        PHs= Gdx.audio.newSound(Gdx.files.internal("assets/audio/sfx/Item-Collect.wav"));//auido
+        PHs= Gdx.audio.newSound(Gdx.files.internal("assets/audio/sfx/Get-Rid-Of.ogg"));//auido
+        PHs= Gdx.audio.newSound(Gdx.files.internal("assets/audio/sfx/drop-sword.wav"));//auido
+        PHm.setLooping(true);//music to make sure it loops
+        PHm.play();// use this as a base you need to say it to play
     }
 
     public void update(float deltaTime)
