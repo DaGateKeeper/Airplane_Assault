@@ -22,6 +22,9 @@ public class LevelScreen extends BaseScreen
     public int  enemyDestroyed;
     int SELECTED;
     int highScore;
+    int maxScore=999999;
+    int maxHealth=500;
+    int maxShield=500;
     int score, upgradeNum;
     static Label LivesLabel, Debug, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
     public boolean BossSummoned;
@@ -119,13 +122,13 @@ public class LevelScreen extends BaseScreen
         loseMessage=new loseMessage(200,0,mainStage);
         loseMessage.setVisible(false);
 
-        PHm= Gdx.audio.newMusic( Gdx.files.internal("assets/audio/bgm/Safe.ogg"));//music
-        PHs= Gdx.audio.newSound( Gdx.files.internal("assets/audio/sfx/Missile-Launch.wav"));//auido
-        PHs= Gdx.audio.newSound(Gdx.files.internal("assets/audio/sfx/Item-Collect.wav"));//auido
-        PHs= Gdx.audio.newSound(Gdx.files.internal("assets/audio/sfx/Get-Rid-Of.ogg"));//auido
-        PHs= Gdx.audio.newSound(Gdx.files.internal("assets/audio/sfx/drop-sword.wav"));//auido
-        PHm.setLooping(true);//music to make sure it loops
-        PHm.play();// use this as a base you need to say it to play
+        //PHm= Gdx.audio.newMusic( Gdx.files.internal("assets/Sounds/bgm/Safe.ogg"));//music
+        //PHs= Gdx.audio.newSound( Gdx.files.internal("assets/Sounds/sfx/laser.ogg"));//auido
+        //PHs= Gdx.audio.newSound(Gdx.files.internal("assets/Sounds/sfx/Item-Collect.wav"));//auido
+        //PHs= Gdx.audio.newSound(Gdx.files.internal("assets/Sounds/sfx/alarm.wav"));//auido
+        //PHs= Gdx.audio.newSound(Gdx.files.internal("assets/Sounds/sfx/dead.wav"));//auido
+        //PHm.setLooping(true);//music to make sure it loops
+        //PHm.play();// use this as a base you need to say it to play
     }
 
     public void update(float deltaTime)
@@ -297,21 +300,40 @@ public class LevelScreen extends BaseScreen
                     //will have to work on this at somepoint.. may have to remove the x10 powerup to prevent score overflow...
                     //perhaps just keep the x4 instead.
 
-                    //case "x2":
-                    //score= score*2;
-                    //scoreLabel.setText("Score: " + score);
+                    case "x2":
+                    if(score<maxScore)
+                    {
+                        score= score*2;
+                        scoreLabel.setText("Score: " + score);
+                    }   
 
-                    //case "x4":
-                    //score= score*4;
-                    //scoreLabel.setText("Score: " + score);
-                    
+                    case "x4":
+                    if(score<maxScore)
+                    {
+                        score= score*4;
+                        scoreLabel.setText("Score: " + score);
+                    }   
 
+                    case "health":
+                    if (PlayerHealth < maxHealth)
+                    {
+                        PlayerHealth +=10;
+                        playerLabel.setText("Health:"+PlayerHealth);
+                    }
 
-                    //need to set a limit on how much health each ship could have... After all we don't want players to go over board
-                    //and get to overpowered with health.. perhaps up to five hundred. would need a statement to go here..
-                    //case "health":
-                    //PlayerHealth +=10;
-                    //playerLabel.setText("Health:"+PlayerHealth);
+                    case "shieldrepair":
+                    //having issues on this one. would like some advice on how to fix this when you have the chance
+                    //just need the shields to regenerate back in as well as increase back in.. probably forgot a line of code or two. 
+                    if(PlayerShields<maxShield)
+                    {
+                        float size = shields.getWidth();
+                        size += 10;
+                        double sizeVAR= size;
+                        shields.setBoundaryPolygon(8);
+                        ShieldLabel.setText("Shields:"+sizeVAR);
+
+                    }
+
                 }
             }
         }
