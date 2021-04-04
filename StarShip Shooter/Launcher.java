@@ -9,6 +9,6 @@ public class Launcher
         // (1) creates an instance of the game
         // (2) creates a new application with game instance and window settings as argument
         Game myGame = new StarshipGame();
-        LwjglApplication launcher = new LwjglApplication( myGame, "Airplane Assault!", 800, 800 );
+        LwjglApplication launcher = new LwjglApplication( myGame, "Space Assault!", 800, 800 );
     }
 }

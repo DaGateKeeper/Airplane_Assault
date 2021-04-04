@@ -61,7 +61,7 @@ public class LevelScreen extends BaseScreen
 
         shootTimer = 1;
         enemyTimer = 0;
-        playerLives= 1; // the amount of lives for the player. 
+        playerLives= 3; // the amount of lives for the player. 
         BossSummoned= false;
         //BossT=10000;
         player = new Player(350, 100, mainStage,SELECTED);
@@ -97,13 +97,12 @@ public class LevelScreen extends BaseScreen
         }
 
         score = 0; 
-        scoreLabel = new Label("Score: " + score, BaseGame.labelStyle);scoreLabel.setFontScale(0.5f);
+        scoreLabel = new Label("Score: " + score, BaseGame.labelStyle);scoreLabel.setFontScale(0.4f);
         playerLabel = new Label("Health:"+PlayerHealth, BaseGame.labelStyle);   
-        playerLabel.setFontScale(0.5f);
-        upgradeLabel = new Label("Upgrades: " + upgradeNum, BaseGame.labelStyle);upgradeLabel.setFontScale(0.5f);
-        LivesLabel= new Label("Lives:" +playerLives, BaseGame.labelStyle);LivesLabel.setFontScale(0.5f);
-        HIscoreLabel= new Label("Highscores " + highScore, BaseGame.labelStyle);HIscoreLabel.setFontScale(0.5f);
-        ShieldLabel= new Label("Shields:"+PlayerShields, BaseGame.labelStyle);ShieldLabel.setFontScale(0.5f);
+        playerLabel.setFontScale(0.4f);
+        LivesLabel= new Label("Lives:" +playerLives, BaseGame.labelStyle);LivesLabel.setFontScale(0.4f);
+        HIscoreLabel= new Label("Highscores " + highScore, BaseGame.labelStyle);HIscoreLabel.setFontScale(0.4f);
+        ShieldLabel= new Label("Shields:"+PlayerShields, BaseGame.labelStyle);ShieldLabel.setFontScale(0.4f);
 
         uiTable.add( playerLabel ).expandX().expandY().left().top().pad(20);
         uiTable.add( ShieldLabel ).expandX().expandY().left().top().pad(20);
@@ -263,7 +262,8 @@ public class LevelScreen extends BaseScreen
                 PlayerHealth-=10;
                 playerLabel.setText("Health:"+PlayerHealth);
             }
-            float itemChance = 0.5f;
+
+            float itemChance = 0.3f;
             for(BaseActor playerbullet: BaseActor.getList(mainStage,"PlayerBullet"))
             {
 
@@ -276,13 +276,12 @@ public class LevelScreen extends BaseScreen
                     enemyDestroyed++;
                     score+=100;
 
-                    Debug.setText("Destroyed" +enemyDestroyed);
                     if(Math.random() <itemChance)
                     {
                         PowerUps item = new PowerUps(0 , 0, mainStage);
                         item.centerAt(e);
                     }
-                    //float itemChance = 0.5f;
+
                     //if(Math.random() <itemChance)
                     //{
                     //    PowerUps item = new PowerUps(0 , 0, mainStage);

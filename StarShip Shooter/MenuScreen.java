@@ -15,18 +15,21 @@ public class MenuScreen extends BaseScreen
         for (BaseActor ocean : BaseActor.getList(mainStage, "Ocean"))
             ocean.toBack();
 
-        Label title = new Label("StarShip\nShooter", BaseGame.labelStyle);
+        Label title = new Label(" Space\nAssault", BaseGame.labelStyle);
         title.setFontScale(2);
-        title.setColor( Color.BLUE );
+        title.setColor( Color.WHITE);
 
-        Label instructions = new Label("Press 'S' to Start", BaseGame.labelStyle);
-        instructions.setColor( Color.CYAN );
+        Label instructions = new Label("Press 'S' to Start", BaseGame.labelStyle2);
+        instructions.setColor( Color.WHITE );
+        instructions.setFontScale(1.5f);
 
-        Label goal2 = new Label("Press 'H' for Instructions", BaseGame.labelStyle);
-        goal2.setColor( Color.CYAN );
+        Label goal2 = new Label("Press 'H' for Instructions", BaseGame.labelStyle2);
+        goal2.setColor( Color.WHITE );
+        goal2.setFontScale(1.5f);
 
-        Label credits = new Label("Press 'W' for Credits", BaseGame.labelStyle);
-        credits.setColor( Color.CYAN );
+        Label credits = new Label("Press 'W' for Credits", BaseGame.labelStyle2);
+        credits.setColor( Color.WHITE);
+        credits.setFontScale(1.5f);
 
         uiTable.add(title);
         uiTable.row();
