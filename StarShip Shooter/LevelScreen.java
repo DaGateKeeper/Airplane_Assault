@@ -154,7 +154,7 @@ public class LevelScreen extends BaseScreen
             ShieldLabel.setText("Shields:"+0);
         }
 
-        if(SELECTED ==0)//change this later
+        if(SELECTED ==2)//change this later
         { // **************TESTING IN PROGRESS#############TRIPLE SHOT
             if (Gdx.input.isKeyPressed(Keys.SPACE) && shootTimer >.25 && player.isOnStage())
             {
@@ -169,12 +169,16 @@ public class LevelScreen extends BaseScreen
                 shootTimer=0;
             }
         }
-        else if(SELECTED==2)
+        else if(SELECTED==1)
         {
             if(Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1&& player.isOnStage())
             {
                 PlayerBullet pb = new PlayerBullet(0,0, mainStage);
+                PlayerBullet pb2 = new PlayerBullet(0,0, mainStage);
                 pb.centerAt(player);
+                pb2.centerAt(player);
+                pb.moveBy(-50,0);
+                pb2.moveBy(50,0);
                 shootTimer=0;
             }
         }
