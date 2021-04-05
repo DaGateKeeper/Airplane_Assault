@@ -26,13 +26,13 @@ public class LevelScreen extends BaseScreen
     int maxHealth=500;
     int maxShield=500;
     int score, upgradeNum;
-    static Label LivesLabel, Debug, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
+    static Label LivesLabel, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
     public boolean BossSummoned;
     Shields shields;
     int maxShieldSize;
     // pixels per second
     int shieldRegenerationRate;
-    static double PlayerHealth, debugh;
+    static double PlayerHealth;
     public double PlayerShields;
 
     public Sound explodeSound, EnemyShootA, PlayerShootA, BossSpawn, PlayerHit, itemCollect, PHs;
@@ -65,12 +65,7 @@ public class LevelScreen extends BaseScreen
         BossSummoned= false;
         //BossT=10000;
         player = new Player(350, 100, mainStage,SELECTED);
-
-        debugh=Databases.getBossStats(0).getHealth();
-        //Debug= new Label("Health:"+debugh, BaseGame.labelStyle);
-        Debug= new Label("Destroyed:"+enemyDestroyed, BaseGame.labelStyle);
-
-        Debug.setFontScale(0.5f);
+       
         maxShieldSize = Databases.getPlayerCopy(SELECTED).getSheilds();  
 
         shields = new Shields(0,0, mainStage);
@@ -114,10 +109,6 @@ public class LevelScreen extends BaseScreen
         uiTable.add(LivesLabel).expandX().right().top().pad(20);
 
         //uiTable.debugCell();
-        uiTable.row();
-        uiTable.add();
-        uiTable.add(Debug).expandX().right().top().pad(20);
-
         loseMessage=new loseMessage(200,0,mainStage);
         loseMessage.setVisible(false);
 
@@ -229,7 +220,7 @@ public class LevelScreen extends BaseScreen
         // int BossSpawned=1;
         //   BossT=0;
         // }
-        if (enemyDestroyed==5)
+        if (enemyDestroyed>=5 && BossSummoned==false)
         {
             new Boss(1,mainStage);
             BossSummoned=true;
@@ -259,8 +250,8 @@ public class LevelScreen extends BaseScreen
                 Explosion exp = new Explosion(0, 0, mainStage);
                 exp.centerAt(e);
                 e.remove();
-                PlayerHealth-=10;
-                playerLabel.setText("Health:"+PlayerHealth);
+                // PlayerHealth-=10;
+                // playerLabel.setText("Health:"+PlayerHealth);
             }
 
             float itemChance = 0.3f;
