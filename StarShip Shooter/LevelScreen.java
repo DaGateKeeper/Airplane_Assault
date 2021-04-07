@@ -204,16 +204,21 @@ public class LevelScreen extends BaseScreen
 
         BossT+= deltaTime;
 
-        if (enemyTimer> .5 && BossSummoned==false && player.isOnStage())
+        if (enemyTimer> 2 && BossSummoned==false && player.isOnStage())
         {
             // spawn new enemy off-screen
-            double RAND=Math.random()*4 + 1;
-
+            double RAND=Math.random()*8 + 1;
+            if (RAND<5){
+            new Enemy((int)RAND, mainStage);
+            // reset the timer
+            enemyTimer = 0;
+        }else{
             // spawn new enemy off-screen
             new Enemy((int)RAND, mainStage);
             // reset the timer
             enemyTimer = 0;
         }
+    }
         // else {
         //if(BossT>100)
         //{new Boss(1,mainStage);

@@ -44,6 +44,26 @@ public class Enemy extends BaseActor
             time = -2;
             function = new HourglassPath();
             setAnimator( new Animator("assets/ships/Enemy4.png") );
+        }else if (preset == 5)
+        {
+            function = new CircularPath();
+            setAnimator( new Animator("assets/ships/Alien-Scout.png") );
+        }
+        else if (preset == 6)
+        {
+            function = new SinePath();
+            setAnimator( new Animator("assets/ships/Alien-Frigate.png") );
+        }
+        else if (preset == 7)
+        {
+            function = new HourglassPath();
+            setAnimator( new Animator("assets/ships/Alien-Cruiser.png") );
+        }
+        else if (preset == 8)
+        {
+            time = 1;
+            function = new LinearPath();
+            setAnimator( new Animator("assets/ships/Alien-HeavyCruiser.png") );
         }
     }
 
@@ -72,16 +92,24 @@ public class Enemy extends BaseActor
         // enemy must be above player:
         //  && this.getY() > player.getY()
 
-        if ( shootTimer > 1)
+        if (preset>4&& shootTimer > 1)
+        { EnemyBullet eb = new EnemyBullet(0,0, getStage());
+            eb.centerAt(this);
+            eb.setRotation(90);
+            eb.physics.setMotionAngle(270);
+
+            shootTimer = 0;}
+        else if
+        ( shootTimer > 2)
         {
-            //EnemyBullet eb = new EnemyBullet(0,0, getStage());
-           // eb.centerAt(this);
+            EnemyBullet eb = new EnemyBullet(0,0, getStage());
+            eb.centerAt(this);
 
             Vector2 displacement = player.getPosition().sub( this.getPosition() );
             float angle = displacement.angle(); 
 
-            //eb.setRotation(angle + 90);
-            //eb.physics.setMotionAngle(angle);
+            eb.setRotation(angle + 90);
+            eb.physics.setMotionAngle(angle);
 
             shootTimer = 0;
         }
