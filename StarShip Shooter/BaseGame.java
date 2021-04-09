@@ -21,7 +21,7 @@ public abstract class BaseGame extends Game
     private static BaseGame game;
 
     public static LabelStyle labelStyle; // BitmapFont + Color
-    
+
     public static LabelStyle labelStyle2;
 
     /**
@@ -58,13 +58,13 @@ public abstract class BaseGame extends Game
         FreeTypeFontGenerator fontGenerator2 = 
             new FreeTypeFontGenerator(Gdx.files.internal("assets/fox.ttf"));
         FreeTypeFontParameter fontParameters2 = new FreeTypeFontParameter();
-        fontParameters.size = 48;
-        fontParameters.color = Color.WHITE;
-        fontParameters.borderWidth = 4;
-        fontParameters.borderColor = Color.BLACK;
-        fontParameters.borderStraight = true;
-        fontParameters.minFilter = TextureFilter.Linear;
-        fontParameters.magFilter = TextureFilter.Linear;
+        fontParameters2.size = 48;
+        fontParameters2.color = Color.WHITE;
+        fontParameters2.borderWidth = 4;
+        fontParameters2.borderColor = Color.BLACK;
+        fontParameters2.borderStraight = true;
+        fontParameters2.minFilter = TextureFilter.Linear;
+        fontParameters2.magFilter = TextureFilter.Linear;
 
         BitmapFont customFont2 = fontGenerator.generateFont(fontParameters2);
 
