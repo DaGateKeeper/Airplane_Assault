@@ -7,8 +7,8 @@ import com.badlogic.gdx.audio.Sound;
 /**
  * Write a description of class HowToScreen here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * James Meurer and John Kulins
+ * 4/9/2021
  */
 public class HowToScreen extends BaseScreen
 {
@@ -24,27 +24,27 @@ public class HowToScreen extends BaseScreen
         Label intro = new Label("How to Play!: ", BaseGame.labelStyle);
 
         Label instruct1 = new Label("Use the arrow keys to move", BaseGame.labelStyle2);
-        instruct1.setFontScale(1.5f);
+        instruct1.setFontScale(0.5f);
         instruct1.setColor( Color.WHITE );
 
         Label instruct2 = new Label("use space button to fire", BaseGame.labelStyle2);
-        instruct2.setFontScale(1.5f);
+        instruct2.setFontScale(0.5f);
         instruct2.setColor( Color.WHITE );
 
         Label instruct3 = new Label("Most of all have fun!",BaseGame.labelStyle2);
-        instruct3.setFontScale(1.5f);
+        instruct3.setFontScale(0.5f);
         instruct3.setColor( Color.WHITE );
 
         Label StartScreen = new Label("Press the S key to start the game!",BaseGame.labelStyle2);
-        StartScreen.setFontScale(1.5f);
+        StartScreen.setFontScale(0.5f);
         StartScreen.setColor(Color.WHITE);
 
         Label CreditsScreen = new Label("Press the W key for the credits screen",BaseGame.labelStyle2);
-        CreditsScreen.setFontScale(1.5f);
+        CreditsScreen.setFontScale(0.5f);
         CreditsScreen.setColor(Color.WHITE);
 
-        Label MainMenu = new Label("Press the M key to return to the main menu", BaseGame.labelStyle2);
-        MainMenu.setFontScale(1.5f);
+        Label MainMenu = new Label("Press the D key to return to the main menu", BaseGame.labelStyle2);
+        MainMenu.setFontScale(0.5f);
         MainMenu.setColor(Color.WHITE);
 
         uiTable.add(intro);
@@ -85,7 +85,7 @@ public class HowToScreen extends BaseScreen
         if (Gdx.input.isKeyJustPressed(Keys.W)){
             BaseGame.setActiveScreen( new CreditsScreen() );        
         }
-        if(Gdx.input.isKeyJustPressed(Keys.M))
+        if(Gdx.input.isKeyJustPressed(Keys.D))
         {
             BaseGame.setActiveScreen(new MenuScreen() );
         }

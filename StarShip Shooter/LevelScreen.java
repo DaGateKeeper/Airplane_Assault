@@ -65,7 +65,7 @@ public class LevelScreen extends BaseScreen
         BossSummoned= false;
         //BossT=10000;
         player = new Player(350, 100, mainStage,SELECTED);
-       
+
         maxShieldSize = Databases.getPlayerCopy(SELECTED).getSheilds();  
 
         shields = new Shields(0,0, mainStage);
@@ -79,25 +79,58 @@ public class LevelScreen extends BaseScreen
         PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
 
         //the file needs to go first in order to save the highscore..
-        File f = new File("highScore.txt");
-        try
+        if(SELECTED ==0)
         {
-            Scanner scan = new Scanner(f);
-            highScore = scan.nextInt();
+            File f = new File("highScoreShipSpeedy.txt");
+            try
+            {
+                Scanner scan = new Scanner(f);
+                highScore = scan.nextInt();
+            }
+            catch (Exception error)
+            {
+                // error.printStackTrace();
+                highScore = 0;
+            }
         }
-        catch (Exception error)
+
+        else if(SELECTED ==1)
         {
-            // error.printStackTrace();
-            highScore = 0;
+            File f = new File("highScoreShipAverage.txt");
+            try
+            {
+                Scanner scan = new Scanner(f);
+                highScore = scan.nextInt();
+            }
+            catch (Exception error)
+            {
+                // error.printStackTrace();
+                highScore = 0;
+            }
+
+        }
+        else 
+        {
+            File f = new File("highScoreShipDefense.txt");
+            try
+            {
+                Scanner scan = new Scanner(f);
+                highScore = scan.nextInt();
+            }
+            catch (Exception error)
+            {
+                // error.printStackTrace();
+                highScore = 0;
+            }
         }
 
         score = 0; 
-        scoreLabel = new Label("Score: " + score, BaseGame.labelStyle);scoreLabel.setFontScale(0.4f);
-        playerLabel = new Label("Health:"+PlayerHealth, BaseGame.labelStyle);   
+        scoreLabel = new Label("Score: " + score, BaseGame.labelStyle2);scoreLabel.setFontScale(0.4f);
+        playerLabel = new Label("Health:"+PlayerHealth, BaseGame.labelStyle2);   
         playerLabel.setFontScale(0.4f);
-        LivesLabel= new Label("Lives:" +playerLives, BaseGame.labelStyle);LivesLabel.setFontScale(0.4f);
-        HIscoreLabel= new Label("Highscores " + highScore, BaseGame.labelStyle);HIscoreLabel.setFontScale(0.4f);
-        ShieldLabel= new Label("Shields:"+PlayerShields, BaseGame.labelStyle);ShieldLabel.setFontScale(0.4f);
+        LivesLabel= new Label("Lives:" +playerLives, BaseGame.labelStyle2);LivesLabel.setFontScale(0.4f);
+        HIscoreLabel= new Label("Highscores " + highScore, BaseGame.labelStyle2);HIscoreLabel.setFontScale(0.4f);
+        ShieldLabel= new Label("Shields:"+PlayerShields, BaseGame.labelStyle2);ShieldLabel.setFontScale(0.4f);
 
         uiTable.add( playerLabel ).expandX().expandY().left().top().pad(20);
         uiTable.add( ShieldLabel ).expandX().expandY().left().top().pad(20);
@@ -209,16 +242,16 @@ public class LevelScreen extends BaseScreen
             // spawn new enemy off-screen
             double RAND=Math.random()*8 + 1;
             if (RAND<5){
-            new Enemy((int)RAND, mainStage);
-            // reset the timer
-            enemyTimer = 0;
-        }else{
-            // spawn new enemy off-screen
-            new Enemy((int)RAND, mainStage);
-            // reset the timer
-            enemyTimer = 0;
+                new Enemy((int)RAND, mainStage);
+                // reset the timer
+                enemyTimer = 0;
+            }else{
+                // spawn new enemy off-screen
+                new Enemy((int)RAND, mainStage);
+                // reset the timer
+                enemyTimer = 0;
+            }
         }
-    }
         // else {
         //if(BossT>100)
         //{new Boss(1,mainStage);

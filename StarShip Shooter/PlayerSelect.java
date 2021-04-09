@@ -25,14 +25,14 @@ public class PlayerSelect extends BaseScreen
         Label title = new Label("Ship Info", BaseGame.labelStyle);
         title.setFontScale(1.5f);
 
-        Label SpeedyInfo = new Label("the Fastest ship avaliable \n  has the lowest health of the three \n  can only fire one shot at a time. \n  Press S for Speedy!  ",BaseGame.labelStyle);
+        Label SpeedyInfo = new Label("the Fastest ship avaliable \n  has the lowest health of the three \n  can only fire one shot at a time. \n   Press S for the Speedy Ship!  ",BaseGame.labelStyle);
         SpeedyInfo.setFontScale(0.5f);
         
 
-        Label AverageInfo = new Label("Average Class Fighter of the Game \n standard amount of health and shields. \n can fire two shots at a time \n Press A for Average.", BaseGame.labelStyle);
+        Label AverageInfo = new Label("Average Class Fighter of the Game \n standard amount of health and shields. \n can fire two shots at a time \n Press A for the Average Ship.", BaseGame.labelStyle);
         AverageInfo.setFontScale(0.5f);
 
-        Label DefenseInfo = new Label("The Slowest Ship in the Game \n has the Highest Health \n Three shot spread fire. \n Press D for Defensive.",BaseGame.labelStyle);
+        Label DefenseInfo = new Label("The Slowest Ship in the Game \n has the Highest Health \n Three shot spread fire. \n Press D for the Defensive Ship.",BaseGame.labelStyle);
         DefenseInfo.setFontScale(0.5f);
         
 

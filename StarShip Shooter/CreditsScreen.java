@@ -18,18 +18,18 @@ public class CreditsScreen extends BaseScreen
         Label intro = new Label("StarShip Shooter\nwas made by:", BaseGame.labelStyle);
         intro.setColor( Color.CYAN );
 
-        Label CredName1 = new Label("John Kulins", BaseGame.labelStyle);
+        Label CredName1 = new Label("John Kulins", BaseGame.labelStyle2);
         CredName1.setColor( Color.CYAN );
 
-        Label CredName2 = new Label("James Meurer", BaseGame.labelStyle);
+        Label CredName2 = new Label("James Meurer", BaseGame.labelStyle2);
         CredName2.setColor( Color.CYAN );
         
-        Label HowToScreen = new Label("Press H for instructions", BaseGame.labelStyle);
+        Label HowToScreen = new Label("Press R for instructions", BaseGame.labelStyle);
         HowToScreen.setFontScaleX(0.5f);
         HowToScreen.setColor(Color.CYAN);
         //yes i know this is sloppy...this will be fixed later
         
-        Label MenuScreen = new Label("Press M for the Main Menu",BaseGame.labelStyle);
+        Label MenuScreen = new Label("Press F for the Main Menu",BaseGame.labelStyle);
         MenuScreen.setFontScaleX(0.5f);
         MenuScreen.setColor(Color.CYAN);
         

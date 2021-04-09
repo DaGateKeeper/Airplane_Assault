@@ -21,15 +21,15 @@ public class MenuScreen extends BaseScreen
 
         Label instructions = new Label("Press 'S' to Start", BaseGame.labelStyle2);
         instructions.setColor( Color.WHITE );
-        instructions.setFontScale(1.5f);
+        instructions.setFontScale(1f);
 
-        Label goal2 = new Label("Press 'H' for Instructions", BaseGame.labelStyle2);
+        Label goal2 = new Label("Press 'E' for Instructions", BaseGame.labelStyle2);
         goal2.setColor( Color.WHITE );
-        goal2.setFontScale(1.5f);
+        goal2.setFontScale(1f);
 
-        Label credits = new Label("Press 'W' for Credits", BaseGame.labelStyle2);
+        Label credits = new Label("Press 'D' for Credits", BaseGame.labelStyle2);
         credits.setColor( Color.WHITE);
-        credits.setFontScale(1.5f);
+        credits.setFontScale(1f);
 
         uiTable.add(title);
         uiTable.row();
@@ -56,10 +56,10 @@ public class MenuScreen extends BaseScreen
         if (Gdx.input.isKeyJustPressed(Keys.S)){
             BaseGame.setActiveScreen( new PlayerSelect() );        
         }
-        if (Gdx.input.isKeyJustPressed(Keys.W)){
+        if (Gdx.input.isKeyJustPressed(Keys.E)){
             BaseGame.setActiveScreen( new CreditsScreen() );        
         }
-        if(Gdx.input.isKeyJustPressed(Keys.H)){
+        if(Gdx.input.isKeyJustPressed(Keys.D)){
             BaseGame.setActiveScreen( new HowToScreen() );
         }
         //if(Gdx.input.isKeyJustPressed(Keys.F)){
