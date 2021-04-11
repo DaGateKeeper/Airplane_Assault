@@ -18,24 +18,30 @@ public class Boss extends BaseActor
 
         preset = p;
 
-        setAnimator( new Animator("assets/ships/Boss.png") );
+        setAnimator( new Animator(Databases.getBossStats(preset).getfileName()) );
         setSize(80,80);
         time = 0;
-        shootTimer = 0;
-
+        //shootTimer = 0;
         if (preset == 1)
         {
             time = -2;
             function = new BossPath();
             setAnimator( new Animator("assets/ships/Boss.png") );
             Health=Databases.getBossStats(preset).getHealth();
+        }else
+        if (preset == 2)
+        {
+            time = -2;
+            function = new BossPath2();
+            setAnimator( new Animator("assets/ships/BossLasers.png") );
+            Health=Databases.getBossStats(preset).getHealth();
+
         }
     }
 
     public void takeDamage()
     {
         Health-=10;
-        //LevelScreen.Debug.setText("Health:"+ Health);
     }
 
     public void act(float dt)
@@ -55,16 +61,18 @@ public class Boss extends BaseActor
 
         shootTimer += dt;
 
-        // other possible conditions:
-
-        // enemy waits for first shot:
-        //  && time > 3
-
-        // enemy must be above player:
-        //  && this.getY() > player.getY()
-
-        if ( shootTimer > 1 )
+        if ( shootTimer > 5 && preset==2)
         {
+
+            EnemyBullet eb = new EnemyBullet(0,0, getStage());
+            eb.centerAt(this);
+            eb.moveBy(50,0);
+            eb.physics.setMotionAngle(270);
+
+            if (shootTimer >=7)
+                shootTimer = 0;
+        } 
+        else{
             EnemyBullet eb = new EnemyBullet(0,0, getStage());
             eb.centerAt(this);
 
@@ -74,7 +82,7 @@ public class Boss extends BaseActor
             eb.setRotation(angle + 90);
             eb.physics.setMotionAngle(angle);
 
-            shootTimer = 0;
+            shootTimer = 0;   
         }
 
         for (BaseActor pb : BaseActor.getList(getStage(), "PlayerBullet"))
@@ -84,7 +92,7 @@ public class Boss extends BaseActor
                 pb.remove();//this is important becasue 
                 //then when you hit the hull it does no damage
             }
-            
+
         }
     }
 }

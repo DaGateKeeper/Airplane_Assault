@@ -95,7 +95,7 @@ public class Enemy extends BaseActor
         if (preset>4&& shootTimer > 1)
         { EnemyBullet eb = new EnemyBullet(0,0, getStage());
             eb.centerAt(this);
-            eb.setRotation(90);
+            
             eb.physics.setMotionAngle(270);
 
             shootTimer = 0;}
