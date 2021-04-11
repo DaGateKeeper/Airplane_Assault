@@ -66,7 +66,7 @@ public abstract class BaseGame extends Game
         fontParameters2.minFilter = TextureFilter.Linear;
         fontParameters2.magFilter = TextureFilter.Linear;
 
-        BitmapFont customFont2 = fontGenerator.generateFont(fontParameters2);
+        BitmapFont customFont2 = fontGenerator2.generateFont(fontParameters2);
 
         labelStyle2 = new LabelStyle();
         labelStyle2.font = customFont2;

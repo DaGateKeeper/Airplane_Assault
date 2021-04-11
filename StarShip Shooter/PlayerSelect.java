@@ -23,32 +23,49 @@ public class PlayerSelect extends BaseScreen
         ship3.setAnimator(new Animator("assets/ships/player3.png"));
 
         Label title = new Label("Ship Info", BaseGame.labelStyle);
-        title.setFontScale(1.5f);
+        title.setFontScale(0.5f);
 
-        Label SpeedyInfo = new Label("the Fastest ship avaliable \n  has the lowest health of the three \n  can only fire one shot at a time. \n   Press S for the Speedy Ship!  ",BaseGame.labelStyle);
+        Label SpeedyInfo = new Label("the Fastest ship avaliable \n  has the lowest health of the three \n  can only fire one shot at a time. \n ",BaseGame.labelStyle2);
         SpeedyInfo.setFontScale(0.5f);
-        
 
-        Label AverageInfo = new Label("Average Class Fighter of the Game \n standard amount of health and shields. \n can fire two shots at a time \n Press A for the Average Ship.", BaseGame.labelStyle);
+        Label SelectSpeedy = new Label("Press S for the Speedy Ship!",BaseGame.labelStyle2);
+        SelectSpeedy.setColor(Color.RED);
+        SelectSpeedy.setFontScale(0.5f);
+
+        Label AverageInfo = new Label("Average Class Fighter of the Game \n standard amount of health and shields. \n can fire two shots at a time \n ", BaseGame.labelStyle2);
         AverageInfo.setFontScale(0.5f);
+        
 
-        Label DefenseInfo = new Label("The Slowest Ship in the Game \n has the Highest Health \n Three shot spread fire. \n Press D for the Defensive Ship.",BaseGame.labelStyle);
+        Label SelectAverage = new Label("Press A for Average!",BaseGame.labelStyle2);
+        SelectAverage.setColor(Color.RED);
+        SelectAverage.setFontScale(0.5f);
+
+        Label DefenseInfo = new Label("The Slowest Ship in the Game \n has the Highest Health \n Three shot spread fire. \n" ,BaseGame.labelStyle2);
         DefenseInfo.setFontScale(0.5f);
-        
 
+        Label SelectDefensive= new Label("Press D for Defensive!",BaseGame.labelStyle2);
+        SelectDefensive.setColor(Color.RED);
+        SelectDefensive.setFontScale(0.5f);
         
+        Label Blank = new Label(" ", BaseGame.labelStyle2);
+
+       
+
         uiTable.add(title).colspan(2);
         uiTable.row();
-        uiTable.add(ship1);
-        uiTable.add(SpeedyInfo);
+        uiTable.add(ship1,SpeedyInfo);
         uiTable.row();
-        uiTable.add(ship2);
-        uiTable.add(AverageInfo);
+        uiTable.add(Blank  ,SelectSpeedy);
         uiTable.row();
-        uiTable.add(ship3);
-        uiTable.add(DefenseInfo);
+        uiTable.add(ship2,AverageInfo);
         uiTable.row();
-        
+        uiTable.add(Blank ,SelectAverage);
+        uiTable.row();
+        uiTable.add(ship3,DefenseInfo);
+        uiTable.row();
+        uiTable.add(Blank ,SelectDefensive);
+        uiTable.row();
+
         uiTable.debugCell();
 
     }

@@ -68,12 +68,12 @@ public class CreditsScreen extends BaseScreen
     public void update(float deltaTime)
     {
         if (Gdx.input.isKeyJustPressed(Keys.S)){
-            BaseGame.setActiveScreen( new  PlayerSelect() );        
+            BaseGame.setActiveScreen( new PlayerSelect() );        
         }
-        if (Gdx.input.isKeyJustPressed(Keys.H)){
+        if (Gdx.input.isKeyJustPressed(Keys.R)){
             BaseGame.setActiveScreen( new HowToScreen() );        
         }
-        if (Gdx.input.isKeyJustPressed(Keys.M)){
+        if (Gdx.input.isKeyJustPressed(Keys.F)){
             BaseGame.setActiveScreen( new MenuScreen() );        
         }
     } 
