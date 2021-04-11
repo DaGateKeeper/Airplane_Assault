@@ -260,7 +260,7 @@ public class LevelScreen extends BaseScreen
         // }
         if (enemyDestroyed>=5 && BossSummoned==false)
         {
-            double RAND=Math.random()*2 + 1;
+            double RAND=Math.random()*2 ;
             new Boss((int)RAND,mainStage);
             BossSummoned=true;
             enemyDestroyed=0;

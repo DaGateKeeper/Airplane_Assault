@@ -22,14 +22,14 @@ public class Boss extends BaseActor
         setSize(80,80);
         time = 0;
         //shootTimer = 0;
-        if (preset == 1)
+        if (preset == 0)
         {
             time = -2;
             function = new BossPath();
             setAnimator( new Animator("assets/ships/Boss.png") );
             Health=Databases.getBossStats(preset).getHealth();
         }else
-        if (preset == 2)
+        if (preset == 1)
         {
             time = -2;
             function = new BossPath2();
@@ -52,16 +52,12 @@ public class Boss extends BaseActor
 
         Vector2 position = function.evaluate(time);
         setPosition(position.x, position.y);
-        if (preset!=1){
-            // make enemy image face angle in direction of movement
-            float movementAngle = function.getDirectionAngle(time);
-            setRotation( movementAngle );
-        }
+        
         BaseActor player = BaseActor.getList(getStage(), "Player").get(0); 
 
         shootTimer += dt;
 
-        if ( shootTimer > 5 && preset==2)
+        if ( shootTimer > 5 && preset==1)
         {
 
             EnemyBullet eb = new EnemyBullet(0,0, getStage());
@@ -72,13 +68,13 @@ public class Boss extends BaseActor
             if (shootTimer >=7)
                 shootTimer = 0;
         } 
-        else{
+        else if( shootTimer > 5){
             EnemyBullet eb = new EnemyBullet(0,0, getStage());
             eb.centerAt(this);
 
             Vector2 displacement = player.getPosition().sub( this.getPosition() );
             float angle = displacement.angle(); 
-
+   
             eb.setRotation(angle + 90);
             eb.physics.setMotionAngle(angle);
 
