@@ -41,7 +41,7 @@ public class Boss extends BaseActor
 
     public void takeDamage()
     {
-        Health-=10;
+        Health-= LevelScreen.DamPlay;
     }
 
     public void act(float dt)

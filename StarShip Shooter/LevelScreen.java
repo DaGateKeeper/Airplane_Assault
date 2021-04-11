@@ -32,7 +32,7 @@ public class LevelScreen extends BaseScreen
     int maxShieldSize;
     // pixels per second
     int shieldRegenerationRate;
-    static double PlayerHealth;
+    static double PlayerHealth;static float DamPlay;
     public double PlayerShields;
 
     public Sound explodeSound, EnemyShootA, PlayerShootA, BossSpawn, PlayerHit, itemCollect, PHs;
@@ -77,7 +77,7 @@ public class LevelScreen extends BaseScreen
 
         PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
         PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
-
+        DamPlay= Databases.getPlayerCopy(SELECTED).getPlayerDamage();
         //the file needs to go first in order to save the highscore..
         if(SELECTED ==0)
         {

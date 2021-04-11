@@ -15,15 +15,15 @@ public final class Databases
        {
             // Initialize all player presets here.
           new Players("assets/ships/player1a.png", 200, 200, 550, 20, 100),
-          new Players("assets/ships/player2.png", 150, 150, 300, 30, 200),
-          new Players("assets/ships/player3.png", 300, 230, 150, 10, 50),  
+          new Players("assets/ships/player2.png", 150, 150, 450, 30, 100),
+          new Players("assets/ships/player3.png", 300, 230, 350, 10, 50),  
        };
         
         BOSSSTATS_ = new Bosses[]
         {
             // Initialize all precautionary measure presets here.
-           new Bosses("assets/ships/Boss.png", 100, 10),
-           new Bosses("assets/ships/BossLasers.png", 100, 10)
+           new Bosses("assets/ships/Boss.png", 500, 10),
+           new Bosses("assets/ships/BossLasers.png", 1000, 10)
           
         };
     }
