@@ -37,15 +37,19 @@ public class HowToScreen extends BaseScreen
 
         Label StartScreen = new Label("Press the S key to start the game!",BaseGame.labelStyle2);
         StartScreen.setFontScale(0.5f);
-        StartScreen.setColor(Color.WHITE);
+        StartScreen.setColor(Color.RED);
 
         Label CreditsScreen = new Label("Press the W key for the credits screen",BaseGame.labelStyle2);
         CreditsScreen.setFontScale(0.5f);
-        CreditsScreen.setColor(Color.WHITE);
+        CreditsScreen.setColor(Color.RED);
 
         Label MainMenu = new Label("Press the D key to return to the main menu", BaseGame.labelStyle2);
         MainMenu.setFontScale(0.5f);
-        MainMenu.setColor(Color.WHITE);
+        MainMenu.setColor(Color.RED);
+        
+        Label PowerUpScreen = new Label("Press A to learn more about the powerups!",BaseGame.labelStyle2);
+        PowerUpScreen.setFontScale(0.5f);
+        PowerUpScreen.setColor(Color.RED);
 
         uiTable.add(intro);
         uiTable.row();
@@ -74,6 +78,10 @@ public class HowToScreen extends BaseScreen
         uiTable.add().pad(10);
         uiTable.row();
         uiTable.add(MainMenu);
+        uiTable.row();
+        uiTable.add().pad(10);
+        uiTable.row();
+        uiTable.add(PowerUpScreen);
         uiTable.debugCell();
     }
 
@@ -88,6 +96,10 @@ public class HowToScreen extends BaseScreen
         if(Gdx.input.isKeyJustPressed(Keys.D))
         {
             BaseGame.setActiveScreen(new MenuScreen() );
+        }
+        if(Gdx.input.isKeyJustPressed(Keys.A))
+        {
+            BaseGame.setActiveScreen(new PowerUpScreen() );
         }
     } 
 }

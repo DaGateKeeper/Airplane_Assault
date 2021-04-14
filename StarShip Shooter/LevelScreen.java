@@ -108,8 +108,9 @@ public class LevelScreen extends BaseScreen
                 highScore = 0;
             }
 
-        }
-        else 
+        } //note THIS IS NEEDED TO SEPERATE THE CODES. tried to do this before...but it created just the highScoreShipDefense file
+          // file instead...so yes this is needed like this..
+        else if(SELECTED ==2)
         {
             File f = new File("highScoreShipDefense.txt");
             try
@@ -441,12 +442,12 @@ public class LevelScreen extends BaseScreen
             loseMessage.setVisible(true);
             loseMessage.addAction(
                 Actions.moveTo(200,350,1.5f));
-            if(score>highScore)
+            if(SELECTED==0 && score>highScore)
             {
                 highScore = score;
                 try
                 {
-                    File f = new File("highScore.txt");
+                    File f = new File("highScoreShipSpeedy.txt");
                     PrintWriter pw = new PrintWriter(f);
 
                     pw.print(highScore);
@@ -458,7 +459,46 @@ public class LevelScreen extends BaseScreen
                     error.printStackTrace();
                 }
             }
+            else if(SELECTED==1 && score>highScore)
+            {
+                highScore = score;
+                try
+                {
+                    File f = new File("highScoreShipAverage.txt");
+                    PrintWriter pw = new PrintWriter(f);
 
+                    pw.print(highScore);
+                    pw.close();
+
+                }
+                catch(Exception error)
+
+                {
+                    error.printStackTrace();
+                }
+
+            }
+            //again this is indeed needed...without it it will just created the highscore defensive file without properly distributing
+            //each of the ships. 
+            else if(SELECTED==2 && score>highScore)
+            {
+                highScore=score;
+                try
+                {
+                    File f = new File("highScoreShipDefense.txt");
+                    PrintWriter pw = new PrintWriter(f);
+
+                    pw.print(highScore);
+                    pw.close();
+
+                }
+                catch(Exception error)
+
+                {
+                    error.printStackTrace();
+                }
+
+            }
         }else if(PlayerHealth<0)
         {
             Explosion exp = new Explosion(0,0,mainStage);

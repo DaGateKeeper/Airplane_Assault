@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.audio.Sound;
 public class PlayerSelect extends BaseScreen
 {
-
     public void initialize()
     {
         BaseActor background = new BaseActor(0,0, mainStage);
@@ -22,7 +21,7 @@ public class PlayerSelect extends BaseScreen
         BaseActor ship3 = new BaseActor(0,0,mainStage);
         ship3.setAnimator(new Animator("assets/ships/player3.png"));
 
-        Label title = new Label("Ship Info", BaseGame.labelStyle);
+        Label title = new Label("Ship Selection!", BaseGame.labelStyle);
         title.setFontScale(0.5f);
 
         Label SpeedyInfo = new Label("the Fastest ship avaliable \n  has the lowest health of the three \n  can only fire one shot at a time. \n ",BaseGame.labelStyle2);
@@ -34,7 +33,6 @@ public class PlayerSelect extends BaseScreen
 
         Label AverageInfo = new Label("Average Class Fighter of the Game \n standard amount of health and shields. \n can fire two shots at a time \n ", BaseGame.labelStyle2);
         AverageInfo.setFontScale(0.5f);
-        
 
         Label SelectAverage = new Label("Press A for Average!",BaseGame.labelStyle2);
         SelectAverage.setColor(Color.RED);
@@ -46,10 +44,8 @@ public class PlayerSelect extends BaseScreen
         Label SelectDefensive= new Label("Press D for Defensive!",BaseGame.labelStyle2);
         SelectDefensive.setColor(Color.RED);
         SelectDefensive.setFontScale(0.5f);
-        
-        Label Blank = new Label(" ", BaseGame.labelStyle2);
 
-       
+        Label Blank = new Label(" ", BaseGame.labelStyle2);
 
         uiTable.add(title).colspan(2);
         uiTable.row();

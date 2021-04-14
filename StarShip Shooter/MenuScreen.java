@@ -56,14 +56,12 @@ public class MenuScreen extends BaseScreen
         if (Gdx.input.isKeyJustPressed(Keys.S)){
             BaseGame.setActiveScreen( new PlayerSelect() );        
         }
-        if (Gdx.input.isKeyJustPressed(Keys.E)){
+        if (Gdx.input.isKeyJustPressed(Keys.D)){
             BaseGame.setActiveScreen( new CreditsScreen() );        
         }
-        if(Gdx.input.isKeyJustPressed(Keys.D)){
+        if(Gdx.input.isKeyJustPressed(Keys.E)){
             BaseGame.setActiveScreen( new HowToScreen() );
         }
-        //if(Gdx.input.isKeyJustPressed(Keys.F)){
-        //BaseGame.setActiveScreen(new HighScoreScreen() );
-        //adding this in for later.. we will be needing this for people to see the high scores
+
     }
 }
