@@ -36,6 +36,14 @@ public class Boss extends BaseActor
             setAnimator( new Animator("assets/ships/BossLasers.png") );
             Health=Databases.getBossStats(preset).getHealth();
 
+        }else
+        if (preset == 2)
+        {
+            time = -2;
+            function = new BossPath3();
+            setAnimator( new Animator("assets/ships/BossLasers.png") );
+            Health=Databases.getBossStats(preset).getHealth();
+
         }
     }
 

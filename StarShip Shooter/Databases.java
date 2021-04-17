@@ -23,8 +23,9 @@ public final class Databases
         {
             // Initialize all precautionary measure presets here.
            new Bosses("assets/ships/Boss.png", 500, 10),
-           new Bosses("assets/ships/BossLasers.png", 1000, 10)
-          
+           new Bosses("assets/ships/BossLasers.png", 1000, 10),
+          new Bosses("assets/ships/Boss2.png", 1000, 10),
+          new Bosses("assets/ships/Boss3.png", 1000, 10)
         };
     }
     
