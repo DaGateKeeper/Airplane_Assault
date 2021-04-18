@@ -109,7 +109,7 @@ public class LevelScreen extends BaseScreen
             }
 
         } //note THIS IS NEEDED TO SEPERATE THE CODES. tried to do this before...but it created just the highScoreShipDefense file
-          // file instead...so yes this is needed like this..
+        // file instead...so yes this is needed like this..
         else if(SELECTED ==2)
         {
             File f = new File("highScoreShipDefense.txt");
@@ -261,8 +261,8 @@ public class LevelScreen extends BaseScreen
         // }
         if (enemyDestroyed>=5 && BossSummoned==false)
         {
-           //double RAND=Math.random()*2;
-           double RAND=2;
+            //double RAND=Math.random()*2;
+            double RAND=2;
             new Boss((int)RAND,mainStage);
             BossSummoned=true;
             enemyDestroyed=0;
@@ -369,156 +369,167 @@ public class LevelScreen extends BaseScreen
 
                     }
 
+                    //case "bomb":
+                    //for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
+                    //{
+                        //if (e.isOnScreen())
+                        //{
+                            //Explosion exp = new Explosion(0,0,mainStage);
+                            //exp.centerAt(e);
+
+                        //}
+                    //}
                 }
             }
-        }
 
-        for(BaseActor eb :BaseActor.getList(mainStage, "EnemyBullet"))   
-        {
-            if ( eb.overlaps(shields) && shields.getWidth()>0)
+            for(BaseActor eb :BaseActor.getList(mainStage, "EnemyBullet"))   
             {
-                eb.remove();
-                Explosion explosion = new Explosion(0,0, mainStage);
-                explosion.centerAt(eb);
+                if ( eb.overlaps(shields) && shields.getWidth()>0)
+                {
+                    eb.remove();
+                    Explosion explosion = new Explosion(0,0, mainStage);
+                    explosion.centerAt(eb);
 
-                float size = shields.getWidth();
-                size -= 50;
-                double sizeVAR= size;
-                // shields.setSize( size, size );
-                // gradually shrink size with an action
-                shields.addAction( Actions.sizeTo(size, size, 0.25f) );
+                    float size = shields.getWidth();
+                    size -= 50;
+                    double sizeVAR= size;
+                    // shields.setSize( size, size );
+                    // gradually shrink size with an action
+                    shields.addAction( Actions.sizeTo(size, size, 0.25f) );
+                    shields.setBoundaryPolygon(8);
+                    ShieldLabel.setText("Shields:"+sizeVAR);
+
+                }
+            }
+
+            for(BaseActor BossD :BaseActor.getList(mainStage, "Boss"))   
+            {
+                if ( BossD.overlaps(shields) && shields.getWidth()>0)
+                {
+
+                    Explosion explosion = new Explosion(0,0, mainStage);
+                    explosion.centerAt(player);
+
+                    float size = shields.getWidth();
+                    size -= 50;
+                    double sizeVAR= size;
+                    // shields.setSize( size, size );
+                    // gradually shrink size with an action
+                    shields.addAction( Actions.sizeTo(size, size, 0.25f) );
+                    shields.setBoundaryPolygon(8);
+                    ShieldLabel.setText("Shields:"+sizeVAR);
+
+                }
+
+                for(BaseActor playerbullet: BaseActor.getList(mainStage,"PlayerBullet"))
+                {
+                    if(playerbullet.overlaps(BossD))
+                    {
+                        Explosion exp = new Explosion(0,0,mainStage);
+                        exp.centerAt(playerbullet);
+
+                    }
+                }
+
+                if(Boss.Health<=0){
+                    BossSummoned=false;
+                    BossD.remove();enemyDestroyed=0;
+                }
+            }
+
+            //managed to get a working lives system going for now...though there are errors with it
+            //the second spawned ship not being able
+            //to be controlled.. This is a good bases though
+
+            if(PlayerHealth <= 0&& playerLives<=0)
+            {
+
+                player.remove();
+                for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
+                {
+                    e.remove();}
+                loseMessage.setVisible(true);
+                loseMessage.addAction(
+                    Actions.moveTo(200,350,1.5f));
+
+                if(SELECTED==0 && score>highScore)
+                {
+                    highScore = score;
+                    try
+                    {
+                        File f = new File("highScoreShipSpeedy.txt");
+                        PrintWriter pw = new PrintWriter(f);
+
+                        pw.print(highScore);
+                        pw.close();
+                    }
+                    catch(Exception error)
+
+                    {
+                        error.printStackTrace();
+                    }
+                }
+                else if(SELECTED==1 && score>highScore)
+                {
+                    highScore = score;
+                    try
+                    {
+                        File f = new File("highScoreShipAverage.txt");
+                        PrintWriter pw = new PrintWriter(f);
+
+                        pw.print(highScore);
+                        pw.close();
+
+                    }
+                    catch(Exception error)
+
+                    {
+                        error.printStackTrace();
+                    }
+
+                }
+                //again this is indeed needed...without it it will just created the highscore defensive file without properly distributing
+                //each of the ships. 
+                else if(SELECTED==2 && score>highScore)
+                {
+                    highScore=score;
+                    try
+                    {
+                        File f = new File("highScoreShipDefense.txt");
+                        PrintWriter pw = new PrintWriter(f);
+
+                        pw.print(highScore);
+                        pw.close();
+
+                    }
+                    catch(Exception error)
+
+                    {
+                        error.printStackTrace();
+                    }
+
+                }
+            }else if(PlayerHealth<0)
+            {
+                Explosion exp = new Explosion(0,0,mainStage);
+                exp.centerAt(player);
+                player.remove();
+                playerLives--;
+                LivesLabel.setText("Lives"+playerLives);
+
+                player = new Player(350, 100, mainStage,SELECTED);
+                PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
+                playerLabel.setText("Health:"+PlayerHealth);
+                PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
+                shields = new Shields(0,0, mainStage);
+                shields.setSize( maxShieldSize, maxShieldSize );
                 shields.setBoundaryPolygon(8);
-                ShieldLabel.setText("Shields:"+sizeVAR);
-
+                // attach shield object to spaceship object
+                shields.centerAt(player);
+                shieldRegenerationRate = 1;
+                update(0);
             }
+
         }
-
-        for(BaseActor BossD :BaseActor.getList(mainStage, "Boss"))   
-        {
-            if ( BossD.overlaps(shields) && shields.getWidth()>0)
-            {
-
-                Explosion explosion = new Explosion(0,0, mainStage);
-                explosion.centerAt(player);
-
-                float size = shields.getWidth();
-                size -= 50;
-                double sizeVAR= size;
-                // shields.setSize( size, size );
-                // gradually shrink size with an action
-                shields.addAction( Actions.sizeTo(size, size, 0.25f) );
-                shields.setBoundaryPolygon(8);
-                ShieldLabel.setText("Shields:"+sizeVAR);
-
-            }
-
-            for(BaseActor playerbullet: BaseActor.getList(mainStage,"PlayerBullet"))
-            {
-                if(playerbullet.overlaps(BossD))
-                {
-                    Explosion exp = new Explosion(0,0,mainStage);
-                    exp.centerAt(playerbullet);
-
-                }
-            }
-
-            if(Boss.Health<=0){
-                BossSummoned=false;
-                BossD.remove();enemyDestroyed=0;
-            }
-        }
-
-        //managed to get a working lives system going for now...though there are errors with it
-        //the second spawned ship not being able
-        //to be controlled.. This is a good bases though
-
-        if(PlayerHealth <= 0&& playerLives<=0)
-        {
-
-            player.remove();
-            for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
-            {
-                e.remove();}
-            loseMessage.setVisible(true);
-            loseMessage.addAction(
-                Actions.moveTo(200,350,1.5f));
-            if(SELECTED==0 && score>highScore)
-            {
-                highScore = score;
-                try
-                {
-                    File f = new File("highScoreShipSpeedy.txt");
-                    PrintWriter pw = new PrintWriter(f);
-
-                    pw.print(highScore);
-                    pw.close();
-                }
-                catch(Exception error)
-
-                {
-                    error.printStackTrace();
-                }
-            }
-            else if(SELECTED==1 && score>highScore)
-            {
-                highScore = score;
-                try
-                {
-                    File f = new File("highScoreShipAverage.txt");
-                    PrintWriter pw = new PrintWriter(f);
-
-                    pw.print(highScore);
-                    pw.close();
-
-                }
-                catch(Exception error)
-
-                {
-                    error.printStackTrace();
-                }
-
-            }
-            //again this is indeed needed...without it it will just created the highscore defensive file without properly distributing
-            //each of the ships. 
-            else if(SELECTED==2 && score>highScore)
-            {
-                highScore=score;
-                try
-                {
-                    File f = new File("highScoreShipDefense.txt");
-                    PrintWriter pw = new PrintWriter(f);
-
-                    pw.print(highScore);
-                    pw.close();
-
-                }
-                catch(Exception error)
-
-                {
-                    error.printStackTrace();
-                }
-
-            }
-        }else if(PlayerHealth<0)
-        {
-            Explosion exp = new Explosion(0,0,mainStage);
-            exp.centerAt(player);
-            player.remove();
-            playerLives--;
-            LivesLabel.setText("Lives"+playerLives);
-
-            player = new Player(350, 100, mainStage,SELECTED);
-            PlayerHealth  = Databases.getPlayerCopy(SELECTED).getHealth();
-            playerLabel.setText("Health:"+PlayerHealth);
-            PlayerShields = Databases.getPlayerCopy(SELECTED).getSheilds();
-            shields = new Shields(0,0, mainStage);
-            shields.setSize( maxShieldSize, maxShieldSize );
-            shields.setBoundaryPolygon(8);
-            // attach shield object to spaceship object
-            shields.centerAt(player);
-            shieldRegenerationRate = 1;
-            update(0);
-        }
-
     }
 }
