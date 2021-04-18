@@ -260,7 +260,7 @@ public class LevelScreen extends BaseScreen
         // int BossSpawned=1;
         //   BossT=0;
         // }
-        if (enemyDestroyed>=5 && BossSummoned==false)
+        if (enemyDestroyed>=500 && BossSummoned==false)
         {
             //double RAND=Math.random()*2;
             double RAND=2;
@@ -296,7 +296,7 @@ public class LevelScreen extends BaseScreen
                 // playerLabel.setText("Health:"+PlayerHealth);
             }
 
-            float itemChance = 1.3f;
+            float itemChance = 2f;
             for(BaseActor playerbullet: BaseActor.getList(mainStage,"PlayerBullet"))
             {
 
@@ -324,42 +324,57 @@ public class LevelScreen extends BaseScreen
 
             }}
 
-        for(BaseActor actor : BaseActor.getList (mainStage, "PowerUps"))
+        for(BaseActor powerup : BaseActor.getList (mainStage, "PowerUps"))
         {
-            PowerUps item = (PowerUps)actor;
-            if(player.overlaps(item))
+            int enemyMultiplyer=0;
+            if(player.overlaps(powerup))
             {
-                item.remove();
-                switch(item.imageName)
+                powerup.remove();
+                String type = ((PowerUps)powerup).imageName;
+
+                //will have to work on this at somepoint.. may have to remove the x10 powerup to prevent score overflow...
+                //perhaps just keep the x4 instead.
+
+                if ( type.equals("x2") )
                 {
-
-                    //will have to work on this at somepoint.. may have to remove the x10 powerup to prevent score overflow...
-                    //perhaps just keep the x4 instead.
-
-                    case "x2":
-                    if(score<maxScore)
+                    if(enemyMultiplyer > 0)
                     {
-                        score= score*2;
-                        scoreLabel.setText("Score: " + score);
-                    }   
-
-                    case "x4":
-                    if(score<maxScore)
+                        score+=200;
+                        enemyMultiplyer++;
+                        System.out.println(enemyMultiplyer++);
+                    }
+                    else if(enemyMultiplyer ==5)
                     {
-                        score= score*4;
-                        scoreLabel.setText("Score: " + score);
-                    }   
+                        score+=100;
+                        enemyMultiplyer=0;
+                    }
 
-                    case "health":
+                }
+                else if ( type.equals("x4") )
+                {
+                    if(enemyMultiplyer > 0)
+                    {
+                        score+=400;
+                        enemyMultiplyer++;
+                        System.out.println(enemyMultiplyer++);
+                    }
+                    else if(enemyMultiplyer == 5)
+                    {
+                        score+=100;
+                        enemyMultiplyer=0;
+                    }
+                }
+
+                else if( type.equals("health") )
+                {
                     if (PlayerHealth < maxHealth)
                     {
                         PlayerHealth +=10;
                         playerLabel.setText("Health:"+PlayerHealth);
                     }
-
-                    case "shieldrepair":
-                    //having issues on this one. would like some advice on how to fix this when you have the chance
-                    //just need the shields to regenerate back in as well as increase back in.. probably forgot a line of code or two. 
+                }
+                else if(type.equals("shieldrepair") )
+                {
                     if(PlayerShields<maxShield)
                     {
                         float size = shields.getWidth();
@@ -369,25 +384,21 @@ public class LevelScreen extends BaseScreen
                         ShieldLabel.setText("Shields:"+sizeVAR);
 
                     }
-
-                    case"bomb":
-                    //issues with the bomb...collecting with another powerup causes the other powerups to cause an explosion
-                    
-                    if(bomb ==0)
-                    {
-                        for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
-                        {
-                            Explosion exp = new Explosion(0,0,mainStage);
-                            exp.centerAt(e);
-                            e.remove();
-                            enemyDestroyed++;
-                            score+=500;
-                            bomb=1;
-                        }
-                        bomb = 0;
-                    }
-
                 }
+
+                else if(type.equals("bomb"))
+                {
+                    for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
+                    {
+                        Explosion exp = new Explosion(0,0,mainStage);
+                        exp.centerAt(e);
+                        e.remove();
+                        enemyDestroyed++;
+                        score+=500;
+                    }
+                }
+
+                //issues with the bomb...collecting with another powerup causes the other powerups to cause an explosion
             }
         }
 
