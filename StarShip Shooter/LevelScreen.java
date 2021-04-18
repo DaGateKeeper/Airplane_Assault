@@ -26,6 +26,7 @@ public class LevelScreen extends BaseScreen
     int maxHealth=500;
     int maxShield=500;
     int score, upgradeNum;
+    int bomb = 0;
     static Label LivesLabel, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
     public boolean BossSummoned;
     Shields shields;
@@ -109,7 +110,7 @@ public class LevelScreen extends BaseScreen
             }
 
         } //note THIS IS NEEDED TO SEPERATE THE CODES. tried to do this before...but it created just the highScoreShipDefense file
-          // file instead...so yes this is needed like this..
+        // file instead...so yes this is needed like this..
         else if(SELECTED ==2)
         {
             File f = new File("highScoreShipDefense.txt");
@@ -261,8 +262,8 @@ public class LevelScreen extends BaseScreen
         // }
         if (enemyDestroyed>=5 && BossSummoned==false)
         {
-           //double RAND=Math.random()*2;
-           double RAND=2;
+            //double RAND=Math.random()*2;
+            double RAND=2;
             new Boss((int)RAND,mainStage);
             BossSummoned=true;
             enemyDestroyed=0;
@@ -295,7 +296,7 @@ public class LevelScreen extends BaseScreen
                 // playerLabel.setText("Health:"+PlayerHealth);
             }
 
-            float itemChance = 0.3f;
+            float itemChance = 1.3f;
             for(BaseActor playerbullet: BaseActor.getList(mainStage,"PlayerBullet"))
             {
 
@@ -367,6 +368,23 @@ public class LevelScreen extends BaseScreen
                         shields.setBoundaryPolygon(8);
                         ShieldLabel.setText("Shields:"+sizeVAR);
 
+                    }
+
+                    case"bomb":
+                    //issues with the bomb...collecting with another powerup causes the other powerups to cause an explosion
+                    
+                    if(bomb ==0)
+                    {
+                        for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
+                        {
+                            Explosion exp = new Explosion(0,0,mainStage);
+                            exp.centerAt(e);
+                            e.remove();
+                            enemyDestroyed++;
+                            score+=500;
+                            bomb=1;
+                        }
+                        bomb = 0;
                     }
 
                 }
