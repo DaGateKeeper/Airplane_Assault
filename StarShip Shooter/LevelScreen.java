@@ -46,8 +46,8 @@ public class LevelScreen extends BaseScreen
     // can't say. only time will tell. Hopefully I will be able to remedy some of the issues that are inherently bad. 
     public void initialize()
     {
-        new Ocean(0,0, mainStage);
-        new Ocean(0,800, mainStage);
+        new Space(0,0, mainStage);
+        new Space(0,800, mainStage);
         //the below variable allows for manual changing of the ship it cooresponds to the index of the database or (fast, medium, slow)
         if (Gdx.input.isKeyJustPressed(Keys.S)){
             SELECTED =0;
@@ -58,7 +58,7 @@ public class LevelScreen extends BaseScreen
         if (Gdx.input.isKeyJustPressed(Keys.A)){
             SELECTED =1;
         }
-        new Island(mainStage);
+        new Planet(mainStage);
 
         shootTimer = 1;
         enemyTimer = 0;
@@ -224,25 +224,25 @@ public class LevelScreen extends BaseScreen
                 shootTimer=0;PlayerShootA.play();
             }}
 
-        int islandCount = BaseActor.getList(mainStage, "Island").size();
-        if ( islandCount < 2 && Math.random() < 0.03 )
+        int planetCount = BaseActor.getList(mainStage, "Planet").size();
+        if ( planetCount < 2 && Math.random() < 0.03 )
         {
-            Island i = new Island(mainStage);
-            i.toBack();
+            Planet p = new Planet(mainStage);
+            p.toBack();
         }
 
         // prevent islands from overlapping with each other
-        for (BaseActor island1 : BaseActor.getList(mainStage, "Island"))
+        for (BaseActor planet1 : BaseActor.getList(mainStage, "Planet"))
         {
-            for (BaseActor island2 : BaseActor.getList(mainStage, "Island"))
+            for (BaseActor planet2 : BaseActor.getList(mainStage, "Planet"))
             {
-                if (island1 != island2)
-                    island1.preventOverlap(island2);
+                if (planet1 != planet2)
+                    planet1.preventOverlap(planet2);
             }
         }
 
-        for (BaseActor ocean : BaseActor.getList(mainStage, "Ocean"))
-            ocean.toBack();
+        for (BaseActor space : BaseActor.getList(mainStage, "Space"))
+            space.toBack();
 
         enemyTimer += deltaTime;
 

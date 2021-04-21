@@ -1,14 +1,14 @@
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
-public class Ocean extends BaseActor
+public class Space extends BaseActor
 {
 
-    public Ocean(float x, float y, Stage stage)
+    public Space(float x, float y, Stage stage)
     {
         super(x,y,stage);
 
-        setAnimator( new Animator( "assets/water.jpg" ) );
+        setAnimator( new Animator( "assets/space.jpg" ) );
         setSize(800,800);
         setPhysics( new Physics(0, 100, 0) );
         physics.setSpeed(100);

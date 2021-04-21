@@ -1,14 +1,14 @@
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
-public class Island extends BaseActor
+public class Planet extends BaseActor
 {
 
-    public Island(Stage stage)
+    public Planet(Stage stage)
     {
         super((float)(600 * Math.random() + 100), 900, stage);
         
-        String[] fileNames = {"island1", "island2", "island3"};
+        String[] fileNames = {"planet1", "planet2", "planet3"};
         int randomIndex = (int)( fileNames.length * Math.random() );
         String fileName = fileNames[randomIndex];
         

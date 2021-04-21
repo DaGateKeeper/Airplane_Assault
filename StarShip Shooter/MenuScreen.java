@@ -10,10 +10,10 @@ public class MenuScreen extends BaseScreen
     public void initialize()
     {
         BaseActor background = new BaseActor(0,0, mainStage);
-        background.setAnimator( new Animator("assets/water.jpg") );
+        background.setAnimator( new Animator("assets/space.jpg") );
         background.setSize(800,800);
-        for (BaseActor ocean : BaseActor.getList(mainStage, "Ocean"))
-            ocean.toBack();
+        for (BaseActor space : BaseActor.getList(mainStage, "Space"))
+            space.toBack();
 
         Label title = new Label(" Space\nAssault", BaseGame.labelStyle);
         title.setFontScale(2);
