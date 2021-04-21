@@ -36,7 +36,7 @@ public class LevelScreen extends BaseScreen
     static double PlayerHealth;static float DamPlay;
     public double PlayerShields;
 
-    public Sound explodeSound, EnemyShootA, PlayerShootA, BossSpawn, PlayerHit, itemCollect, PHs;
+    public Sound AlarmBoss, explodeSound, EnemyShootA, PlayerShootA, BossSpawn, PlayerHit, itemCollect, PHs;
     public Music MenuTrack, LevelTrack, PHm;
     //again this part here was for testing highscore to see if
     //it was actually saving the score we would get. 
@@ -147,13 +147,20 @@ public class LevelScreen extends BaseScreen
         loseMessage=new loseMessage(200,0,mainStage);
         loseMessage.setVisible(false);
 
-        //PHm= Gdx.audio.newMusic( Gdx.files.internal("assets/Sounds/bgm/Safe.ogg"));//music
-        //PHs= Gdx.audio.newSound( Gdx.files.internal("assets/Sounds/sfx/laser.ogg"));//auido
-        //PHs= Gdx.audio.newSound(Gdx.files.internal("assets/Sounds/sfx/Item-Collect.wav"));//auido
-        //PHs= Gdx.audio.newSound(Gdx.files.internal("assets/Sounds/sfx/alarm.wav"));//auido
+        //explodeSound, EnemyShootA, PlayerShootA, BossSpawn, 
+        //PlayerHit, itemCollect, PHs;
+        //public Music MenuTrack, LevelTrack, PHm;
+        LevelTrack= Gdx.audio.newMusic( Gdx.files.internal("assets/Sounds/bgm/Safe.ogg"));//music
+        PlayerShootA= Gdx.audio.newSound( Gdx.files.internal("assets/Sounds/sfx/laser.ogg"));//auido
+        itemCollect= Gdx.audio.newSound(Gdx.files.internal("assets/Sounds/sfx/Item-Collect.wav"));//auido
+        AlarmBoss= Gdx.audio.newSound(Gdx.files.internal("assets/Sounds/sfx/alarm.wav"));//auido
+        //hit
+        //long laser fire
+        //enemy fire sound
+        //an enemy death sound.
         //PHs= Gdx.audio.newSound(Gdx.files.internal("assets/Sounds/sfx/dead.wav"));//auido
-        //PHm.setLooping(true);//music to make sure it loops
-        //PHm.play();// use this as a base you need to say it to play
+        LevelTrack.setLooping(true);//music to make sure it loops
+        LevelTrack.play();// use this as a base you need to say it to play
     }
 
     public void update(float deltaTime)
@@ -191,6 +198,7 @@ public class LevelScreen extends BaseScreen
                     pb.centerAt(player);
 
                 }
+                PlayerShootA.play();
                 shootTimer=0;
             }
         }
@@ -205,6 +213,7 @@ public class LevelScreen extends BaseScreen
                 pb.moveBy(-50,0);
                 pb2.moveBy(50,0);
                 shootTimer=0;
+                PlayerShootA.play();
             }
         }
         else{
@@ -212,7 +221,7 @@ public class LevelScreen extends BaseScreen
             {
                 PlayerBullet pb = new PlayerBullet(0,0, mainStage);
                 pb.centerAt(player);
-                shootTimer=0;
+                shootTimer=0;PlayerShootA.play();
             }}
 
         int islandCount = BaseActor.getList(mainStage, "Island").size();
@@ -267,6 +276,7 @@ public class LevelScreen extends BaseScreen
             new Boss((int)RAND,mainStage);
             BossSummoned=true;
             enemyDestroyed=0;
+            AlarmBoss.play();
         }
 
         for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
@@ -331,7 +341,7 @@ public class LevelScreen extends BaseScreen
             {
                 powerup.remove();
                 String type = ((PowerUps)powerup).imageName;
-
+                itemCollect.play();
                 //will have to work on this at somepoint.. may have to remove the x10 powerup to prevent score overflow...
                 //perhaps just keep the x4 instead.
 
@@ -382,7 +392,8 @@ public class LevelScreen extends BaseScreen
                         double sizeVAR= size;
                         shields.setBoundaryPolygon(8);
                         ShieldLabel.setText("Shields:"+sizeVAR);
-
+                        shields.addAction( Actions.sizeTo(size, size, 0.25f) );
+                        shields.setBoundaryPolygon(8);
                     }
                 }
 
