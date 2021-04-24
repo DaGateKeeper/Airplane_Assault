@@ -388,7 +388,7 @@ public class LevelScreen extends BaseScreen
                     if(PlayerShields<maxShield)
                     {
                         float size = shields.getWidth();
-                        size += 10;
+                        size += 30;
                         double sizeVAR= size;
                         shields.setBoundaryPolygon(8);
                         ShieldLabel.setText("Shields:"+sizeVAR);
@@ -408,8 +408,27 @@ public class LevelScreen extends BaseScreen
                         score+=500;
                     }
                 }
+                else if(type.equals("pierceshot"))
+                {
+                    for(BaseActor playerbullet: BaseActor.getList(mainStage,"PlayerBullet"))
+                    {
 
-                //issues with the bomb...collecting with another powerup causes the other powerups to cause an explosion
+                        for (BaseActor e : BaseActor.getList(mainStage, "Enemy")) 
+                        {
+                            if(playerbullet.overlaps(e))
+                            {
+                                Explosion exp = new Explosion(0,0,mainStage);
+                                exp.centerAt(e);
+                                e.remove();
+                                enemyDestroyed++;
+                                score+=100;
+
+                            }
+
+                            //issues with the bomb...collecting with another powerup causes the other powerups to cause an explosion
+                        }
+                    }
+                }
             }
         }
 
