@@ -20,7 +20,7 @@ public class LevelScreen extends BaseScreen
     public Player player;
     public float enemyTimer, BossT;
     public int  enemyDestroyed;
-    int SELECTED;
+    int SELECTED, Spawnrate;
     int highScore;
     int maxScore=999999;
     int maxHealth=500;
@@ -51,12 +51,15 @@ public class LevelScreen extends BaseScreen
         //the below variable allows for manual changing of the ship it cooresponds to the index of the database or (fast, medium, slow)
         if (Gdx.input.isKeyJustPressed(Keys.S)){
             SELECTED =0;
+            Spawnrate=2;
         }
         if (Gdx.input.isKeyJustPressed(Keys.D)){
             SELECTED =2;
+            Spawnrate=2;
         }
         if (Gdx.input.isKeyJustPressed(Keys.A)){
             SELECTED =1;
+            Spawnrate=1;
         }
         new Planet(mainStage);
 
@@ -187,8 +190,8 @@ public class LevelScreen extends BaseScreen
         }
 
         if(SELECTED ==2)//change this later
-        { // **************TESTING IN PROGRESS#############TRIPLE SHOT
-            if (Gdx.input.isKeyPressed(Keys.SPACE) && shootTimer >.25 && player.isOnStage())
+        { //TRIPLE SHOT
+            if (Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >.25 && player.isOnStage())
             {
                 for(int a=1;a<4;a++){
                     int b= 60;
@@ -206,14 +209,10 @@ public class LevelScreen extends BaseScreen
         {
             if(Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1&& player.isOnStage())
             {
-                PlayerBullet pb = new PlayerBullet(0,0, mainStage);
-                PlayerBullet pb2 = new PlayerBullet(0,0, mainStage);
-                pb.centerAt(player);
-                pb2.centerAt(player);
-                pb.moveBy(-50,0);
-                pb2.moveBy(50,0);
-                shootTimer=0;
-                PlayerShootA.play();
+                PlayerBullet pb = new PlayerBullet(0,0, mainStage);PlayerBullet pb2 = new PlayerBullet(0,0, mainStage);
+                pb.centerAt(player);pb2.centerAt(player);
+                pb.moveBy(-50,0);pb2.moveBy(50,0);
+                shootTimer=0;PlayerShootA.play();
             }
         }
         else{
@@ -248,7 +247,7 @@ public class LevelScreen extends BaseScreen
 
         BossT+= deltaTime;
         //if (enemyTimer>5&&enemyTimer<5.1){new Boss(1,mainStage); }
-        if (enemyTimer> 2 && BossSummoned==false && player.isOnStage())
+        if (enemyTimer> Spawnrate && BossSummoned==false && player.isOnStage())
         {
             // spawn new enemy off-screen
             double RAND=Math.random()*8 + 1;
@@ -263,13 +262,9 @@ public class LevelScreen extends BaseScreen
                 enemyTimer = 0;
             }
         }
-        // else {
-        //if(BossT>100)
-        //{new Boss(1,mainStage);
-        // int BossSpawned=1;
-        //   BossT=0;
-        // }
-        if (enemyDestroyed>=500 && BossSummoned==false)
+        // else {if(BossT>100) {new Boss(1,mainStage); int BossSpawned=1;BossT=0;}
+        int DestroyAmount=1;// ability to change it to an array
+        if (enemyDestroyed>=DestroyAmount && BossSummoned==false)
         {
             //double RAND=Math.random()*2;
             double RAND=2;
@@ -302,8 +297,7 @@ public class LevelScreen extends BaseScreen
                 Explosion exp = new Explosion(0, 0, mainStage);
                 exp.centerAt(e);
                 e.remove();
-                // PlayerHealth-=10;
-                // playerLabel.setText("Health:"+PlayerHealth);
+
             }
 
             float itemChance = 2f;
@@ -359,6 +353,7 @@ public class LevelScreen extends BaseScreen
                         enemyMultiplyer=0;
                     }
 
+                    
                 }
                 else if ( type.equals("x4") )
                 {
@@ -391,9 +386,11 @@ public class LevelScreen extends BaseScreen
                         size += 30;
                         double sizeVAR= size;
                         shields.setBoundaryPolygon(8);
-                        ShieldLabel.setText("Shields:"+sizeVAR);
                         shields.addAction( Actions.sizeTo(size, size, 0.25f) );
                         shields.setBoundaryPolygon(8);
+                        ShieldLabel.setText("Shields:"+sizeVAR);
+
+                
                     }
                 }
 
@@ -501,6 +498,9 @@ public class LevelScreen extends BaseScreen
             loseMessage.setVisible(true);
             loseMessage.addAction(
                 Actions.moveTo(200,350,1.5f));
+                LivesLabel.setText("Press 'X' to go back to menu");
+                if (Gdx.input.isKeyPressed(Keys.RIGHT))
+                BaseGame.setActiveScreen( new MenuScreen());
             if(SELECTED==0 && score>highScore)
             {
                 highScore = score;
