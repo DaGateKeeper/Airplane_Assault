@@ -48,11 +48,8 @@ public class PowerUpScreen extends BaseScreen
         
         multiplyerinfo.setFontScale(0.5f);
 
-        Label pierceshotinfo = new Label("Collect these drops to gain a pierce shot, \n the shot continues to go through enemies till it leaves the field",BaseGame.labelStyle2);
-        
-        pierceshotinfo.setFontScale(0.5f);
 
-        Label BombInfo= new Label("Collect these powerups in order to clear the screen of enemies! \n this won't work for the boss though be careful!",BaseGame.labelStyle2);
+        Label BombInfo= new Label("Collect these powerups in order to clear the screen of enemies! ",BaseGame.labelStyle2);
       
         BombInfo.setFontScale(0.5f);
 
@@ -79,8 +76,6 @@ public class PowerUpScreen extends BaseScreen
         uiTable.row();
         uiTable.add(shieldrepair,shieldinfo);
         uiTable.row();
-        uiTable.add(pierceshot ,pierceshotinfo);
-        uiTable.row();
         uiTable.add(bomb,BombInfo);
         uiTable.row();
         uiTable.row();
@@ -89,10 +84,6 @@ public class PowerUpScreen extends BaseScreen
         uiTable.add(Blank, MainMenu);
         uiTable.row();
         uiTable.add(Blank, HowToScreen);
-        
-        
-
-        uiTable.debugCell();
 
     }
 
@@ -105,7 +96,7 @@ public class PowerUpScreen extends BaseScreen
             BaseGame.setActiveScreen(new MenuScreen() );  
         }
         if (Gdx.input.isKeyJustPressed(Keys.A)){
-            BaseGame.setActiveScreen( new LevelScreen() );  
+            BaseGame.setActiveScreen( new HowToScreen() );
         }
     } 
 

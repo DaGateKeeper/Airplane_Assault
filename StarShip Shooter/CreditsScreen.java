@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.audio.Sound;
 public class CreditsScreen extends BaseScreen
 {
-    
+
     public void initialize()
     {
         BaseActor background = new BaseActor(0,0, mainStage);
@@ -16,27 +16,26 @@ public class CreditsScreen extends BaseScreen
             space.toBack();
 
         Label intro = new Label("StarShip Shooter\nwas made by:", BaseGame.labelStyle);
-        intro.setColor( Color.CYAN );
+        intro.setColor( Color.RED );
 
         Label CredName1 = new Label("John Kulins", BaseGame.labelStyle2);
-        CredName1.setColor( Color.CYAN );
+        CredName1.setColor( Color.RED);
 
         Label CredName2 = new Label("James Meurer", BaseGame.labelStyle2);
-        CredName2.setColor( Color.CYAN );
-        
-        Label HowToScreen = new Label("Press R for instructions", BaseGame.labelStyle);
+        CredName2.setColor( Color.RED );
+
+        Label HowToScreen = new Label("Press R for instructions", BaseGame.labelStyle2);
         HowToScreen.setFontScaleX(0.5f);
-        HowToScreen.setColor(Color.CYAN);
+        HowToScreen.setColor(Color.RED);
         //yes i know this is sloppy...this will be fixed later
-        
-        Label MenuScreen = new Label("Press F for the Main Menu",BaseGame.labelStyle);
+
+        Label MenuScreen = new Label("Press F for the Main Menu",BaseGame.labelStyle2);
         MenuScreen.setFontScaleX(0.5f);
-        MenuScreen.setColor(Color.CYAN);
-        
-        Label StartScreen = new Label("Press S to Start the game!",BaseGame.labelStyle);
+        MenuScreen.setColor(Color.RED);
+
+        Label StartScreen = new Label("Press S to Start the game!",BaseGame.labelStyle2);
         StartScreen.setFontScaleX(0.5f);
-        StartScreen.setColor(Color.CYAN);
-        
+        StartScreen.setColor(Color.RED);
 
         uiTable.add(intro);
         uiTable.row();
@@ -62,7 +61,6 @@ public class CreditsScreen extends BaseScreen
         uiTable.row();
         uiTable.add(StartScreen);
         //uiTable.add(credits);
-        uiTable.debugCell();
     }
 
     public void update(float deltaTime)

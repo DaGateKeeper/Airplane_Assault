@@ -27,6 +27,14 @@ public class LevelScreen extends BaseScreen
     int maxShield=500;
     int score, upgradeNum;
     int bomb = 0;
+    int enemyMultiplyer = 1;
+    int enemyMultiplyer2= 1;
+    int enemyMultiplyer3= 1;
+    int enemyMultiplyer4= 1;
+    int enemyMultiplyerDestroyed=0;
+    int enemyMultiplyerDestroyed2=0;
+    int enemyMultiplyerDestroyed3=0;
+    int enemyMultiplyerDestroyed4=0;
     static Label LivesLabel, HIscoreLabel, ShieldLabel, scoreLabel, ammoLabel, playerLabel, upgradeLabel;
     public boolean BossSummoned;
     Shields shields;
@@ -263,7 +271,7 @@ public class LevelScreen extends BaseScreen
             }
         }
         // else {if(BossT>100) {new Boss(1,mainStage); int BossSpawned=1;BossT=0;}
-        int DestroyAmount=1;// ability to change it to an array
+        int DestroyAmount=100;// ability to change it to an array
         if (enemyDestroyed>=DestroyAmount && BossSummoned==false)
         {
             //double RAND=Math.random()*2;
@@ -311,7 +319,7 @@ public class LevelScreen extends BaseScreen
                     playerbullet.remove();
                     e.remove();
                     enemyDestroyed++;
-                    score+=100;
+                    score+=100*enemyMultiplyer*enemyMultiplyer2*enemyMultiplyer3*enemyMultiplyer4;
 
                     if(Math.random() <itemChance)
                     {
@@ -330,7 +338,7 @@ public class LevelScreen extends BaseScreen
 
         for(BaseActor powerup : BaseActor.getList (mainStage, "PowerUps"))
         {
-            int enemyMultiplyer=0;
+
             if(player.overlaps(powerup))
             {
                 powerup.remove();
@@ -341,33 +349,46 @@ public class LevelScreen extends BaseScreen
 
                 if ( type.equals("x2") )
                 {
-                    if(enemyMultiplyer > 0)
+                    enemyMultiplyerDestroyed = enemyDestroyed+5;
+                    if(enemyMultiplyerDestroyed == enemyDestroyed)
                     {
-                        score+=200;
-                        enemyMultiplyer++;
-                        System.out.println(enemyMultiplyer++);
-                    }
-                    else if(enemyMultiplyer ==5)
-                    {
-                        score+=100;
-                        enemyMultiplyer=0;
-                    }
+                        enemyMultiplyer = 1;
 
-                    
+                    }
+                    enemyMultiplyer = 2;
+
                 }
                 else if ( type.equals("x4") )
                 {
-                    if(enemyMultiplyer > 0)
+                    enemyMultiplyerDestroyed2 = enemyDestroyed+5;
+                    if(enemyMultiplyerDestroyed2 == enemyDestroyed)
                     {
-                        score+=400;
-                        enemyMultiplyer++;
-                        System.out.println(enemyMultiplyer++);
+                        enemyMultiplyer2 = 1;
+
                     }
-                    else if(enemyMultiplyer == 5)
+                    enemyMultiplyer2 = 4;
+
+                }
+                else if ( type.equals("x6") )
+                {
+                    enemyMultiplyerDestroyed3 = enemyDestroyed+5;
+                    if(enemyMultiplyerDestroyed3 == enemyDestroyed)
                     {
-                        score+=100;
-                        enemyMultiplyer=0;
+                        enemyMultiplyer3 = 1;
+
                     }
+                    enemyMultiplyer3 = 6;
+                }
+
+                else if ( type.equals("x8") )
+                {
+                    enemyMultiplyerDestroyed4 = enemyDestroyed+5;
+                    if(enemyMultiplyerDestroyed4 == enemyDestroyed)
+                    {
+                        enemyMultiplyer4 = 1;
+
+                    }
+                    enemyMultiplyer4 = 8;
                 }
 
                 else if( type.equals("health") )
@@ -390,7 +411,6 @@ public class LevelScreen extends BaseScreen
                         shields.setBoundaryPolygon(8);
                         ShieldLabel.setText("Shields:"+sizeVAR);
 
-                
                     }
                 }
 
@@ -405,27 +425,7 @@ public class LevelScreen extends BaseScreen
                         score+=500;
                     }
                 }
-                else if(type.equals("pierceshot"))
-                {
-                    for(BaseActor playerbullet: BaseActor.getList(mainStage,"PlayerBullet"))
-                    {
 
-                        for (BaseActor e : BaseActor.getList(mainStage, "Enemy")) 
-                        {
-                            if(playerbullet.overlaps(e))
-                            {
-                                Explosion exp = new Explosion(0,0,mainStage);
-                                exp.centerAt(e);
-                                e.remove();
-                                enemyDestroyed++;
-                                score+=100;
-
-                            }
-
-                            //issues with the bomb...collecting with another powerup causes the other powerups to cause an explosion
-                        }
-                    }
-                }
             }
         }
 
@@ -498,8 +498,8 @@ public class LevelScreen extends BaseScreen
             loseMessage.setVisible(true);
             loseMessage.addAction(
                 Actions.moveTo(200,350,1.5f));
-                LivesLabel.setText("Press 'X' to go back to menu");
-                if (Gdx.input.isKeyPressed(Keys.RIGHT))
+            LivesLabel.setText("Press 'X' to go back to menu");
+            if (Gdx.input.isKeyPressed(Keys.X))
                 BaseGame.setActiveScreen( new MenuScreen());
             if(SELECTED==0 && score>highScore)
             {

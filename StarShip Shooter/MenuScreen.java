@@ -47,8 +47,6 @@ public class MenuScreen extends BaseScreen
         uiTable.row();
         uiTable.add(credits);
         uiTable.row();
-        //uiTable.add(credits);
-        uiTable.debugCell();
     }
 
     public void update(float deltaTime)
