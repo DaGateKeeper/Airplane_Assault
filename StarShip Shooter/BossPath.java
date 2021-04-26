@@ -10,7 +10,7 @@ public class BossPath extends Function
             x = 100;
             y = -650/(float)Math.PI * time + 1050;
         }
-        else // circular motion
+        else
         {   
             x = (float)(300 * Math.cos(time) + 400);
             y = (float)(Math.sin(time) + 400);

@@ -63,11 +63,11 @@ public class LevelScreen extends BaseScreen
         }
         if (Gdx.input.isKeyJustPressed(Keys.D)){
             SELECTED =2;
-            Spawnrate=2;
+            Spawnrate=1;
         }
         if (Gdx.input.isKeyJustPressed(Keys.A)){
             SELECTED =1;
-            Spawnrate=1;
+            Spawnrate=2;
         }
         new Planet(mainStage);
 
@@ -199,7 +199,7 @@ public class LevelScreen extends BaseScreen
 
         if(SELECTED ==2)//change this later
         { //TRIPLE SHOT
-            if (Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >.25 && player.isOnStage())
+            if (Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >.5 && player.isOnStage())
             {
                 for(int a=1;a<4;a++){
                     int b= 60;
@@ -224,7 +224,7 @@ public class LevelScreen extends BaseScreen
             }
         }
         else{
-            if(Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >1&& player.isOnStage())
+            if(Gdx.input.isKeyJustPressed(Keys.SPACE) && shootTimer >.25&& player.isOnStage())
             {
                 PlayerBullet pb = new PlayerBullet(0,0, mainStage);
                 pb.centerAt(player);
@@ -271,17 +271,20 @@ public class LevelScreen extends BaseScreen
             }
         }
         // else {if(BossT>100) {new Boss(1,mainStage); int BossSpawned=1;BossT=0;}
-        int DestroyAmount=100;// ability to change it to an array
-        if (enemyDestroyed>=DestroyAmount && BossSummoned==false)
+        int[] cycleKills ={50,100,150,200,250};
+        for (int x=0; x<=5;x++){
+        if(x==5){x=0;}// ability to change it to an array
+        if (enemyDestroyed>=cycleKills[x] && BossSummoned==false)
         {
-            //double RAND=Math.random()*2;
-            double RAND=2;
+            double RAND=Math.random()*5;
+            
             new Boss((int)RAND,mainStage);
             BossSummoned=true;
             enemyDestroyed=0;
             AlarmBoss.play();
         }
-
+        
+    }
         for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
         {
             if ( e.overlaps(shields) && shields.getWidth()>0)
