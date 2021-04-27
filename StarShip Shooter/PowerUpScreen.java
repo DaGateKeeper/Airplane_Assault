@@ -25,9 +25,6 @@ public class PowerUpScreen extends BaseScreen
         shieldrepair.setAnimator(new Animator("assets/powerups/shieldrepair.png"));
         shieldrepair.setSize(50,52);
         
-        BaseActor pierceshot = new BaseActor(0,0,mainStage);
-        pierceshot.setAnimator(new Animator("assets/powerups/pierceshot.png"));
-        pierceshot.setSize(50,52);
         
         BaseActor health = new BaseActor(0,0,mainStage);
         health.setAnimator(new Animator("assets/powerups/health.png"));

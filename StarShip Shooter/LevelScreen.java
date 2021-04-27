@@ -271,10 +271,10 @@ public class LevelScreen extends BaseScreen
             }
         }
         // else {if(BossT>100) {new Boss(1,mainStage); int BossSpawned=1;BossT=0;}
-        int[] cycleKills ={50,100,150,200,250};
+        int cycleKills = 50;
         for (int x=0; x<=5;x++){
         if(x==5){x=0;}// ability to change it to an array
-        if (enemyDestroyed>=cycleKills[x] && BossSummoned==false)
+        if (enemyDestroyed>=cycleKills && BossSummoned==false)
         {
             double RAND=Math.random()*5;
             
@@ -311,7 +311,7 @@ public class LevelScreen extends BaseScreen
 
             }
 
-            float itemChance = 2f;
+            float itemChance = 0.2f;
             for(BaseActor playerbullet: BaseActor.getList(mainStage,"PlayerBullet"))
             {
 
@@ -491,7 +491,7 @@ public class LevelScreen extends BaseScreen
         //the second spawned ship not being able
         //to be controlled.. This is a good bases though
 
-        if(PlayerHealth <= 0&& playerLives<=0)
+        if(PlayerHealth <= 0 && playerLives<=0)
         {
 
             player.remove();
@@ -504,6 +504,7 @@ public class LevelScreen extends BaseScreen
             LivesLabel.setText("Press 'X' to go back to menu");
             if (Gdx.input.isKeyPressed(Keys.X))
                 BaseGame.setActiveScreen( new MenuScreen());
+                
             if(SELECTED==0 && score>highScore)
             {
                 highScore = score;
@@ -561,6 +562,7 @@ public class LevelScreen extends BaseScreen
                 }
 
             }
+            
         }else if(PlayerHealth<0)
         {
             Explosion exp = new Explosion(0,0,mainStage);
