@@ -272,8 +272,7 @@ public class LevelScreen extends BaseScreen
         }
         // else {if(BossT>100) {new Boss(1,mainStage); int BossSpawned=1;BossT=0;}
         int cycleKills = 50;
-        for (int x=0; x<=5;x++){
-        if(x==5){x=0;}// ability to change it to an array
+        
         if (enemyDestroyed>=cycleKills && BossSummoned==false)
         {
             double RAND=Math.random()*5;
@@ -284,7 +283,7 @@ public class LevelScreen extends BaseScreen
             AlarmBoss.play();
         }
         
-    }
+    
         for (BaseActor e : BaseActor.getList(mainStage, "Enemy"))
         {
             if ( e.overlaps(shields) && shields.getWidth()>0)
