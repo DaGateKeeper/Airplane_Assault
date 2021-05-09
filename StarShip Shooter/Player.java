@@ -18,7 +18,7 @@ public class Player extends BaseActor
         setBoundaryPolygon(8);
 
         setPhysics( new Physics(3000, Databases.getPlayerCopy(INDEXed).getSpeed(), 3000) );
-        maxInvTime = 2;
+        maxInvTime = 0.5f;
         invTimer = maxInvTime;
     }
 
